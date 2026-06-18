@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Audio Recorder</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup">
+      <header class="header">
+        <div class="brand">
+          <img class="brand-mark" src="assets/icon.svg" alt="" aria-hidden="true">
+          <span class="brand-copy">
+            <span class="brand-name">Tab Audio</span>
+            <span class="brand-subtitle">Local MP3 capture</span>
+          </span>
+        </div>
+        <div class="header-actions">
+          <button class="icon-button" id="historyButton" type="button" title="Recording history" aria-label="Recording history">
+            <span class="history-icon" aria-hidden="true"></span>
+          </button>
+          <div class="status-pill" id="statusPill">Ready</div>
+        </div>
+      </header>
+
+      <section class="recorder-card" aria-live="polite">
+        <div class="source-title" id="sourceTitle">Current tab audio</div>
+        <div class="timer" id="timer">00:00</div>
+        <div class="waveform" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+
+      <p class="error" id="errorMessage" hidden></p>
+
+      <section class="panel" id="readyPanel">
+        <button class="button primary" id="startButton" type="button">
+          <span class="button-icon record-icon" aria-hidden="true"></span>
+          Start Recording
+        </button>
+      </section>
+
+      <section class="panel button-row" id="recordingPanel" hidden>
+        <button class="button secondary" id="pauseButton" type="button">
+          <span class="button-icon pause-icon" aria-hidden="true"></span>
+          Pause
+        </button>
+        <button class="button danger" id="stopButton" type="button">
+          <span class="button-icon stop-icon" aria-hidden="true"></span>
+          Stop
+        </button>
+      </section>
+
+      <section class="panel button-row" id="pausedPanel" hidden>
+        <button class="button primary" id="resumeButton" type="button">
+          <span class="button-icon resume-icon" aria-hidden="true"></span>
+          Resume
+        </button>
+        <button class="button danger" id="stopPausedButton" type="button">
+          <span class="button-icon stop-icon" aria-hidden="true"></span>
+          Stop
+        </button>
+      </section>
+
+      <section class="panel save-panel" id="savePanel" hidden>
+        <label class="field">
+          <span>Filename</span>
+          <input id="filenameInput" type="text" spellcheck="false">
+        </label>
+        <div class="button-row">
+          <button class="button primary" id="saveButton" type="button">
+            <span class="button-icon save-icon" aria-hidden="true"></span>
+            Save MP3
+          </button>
+          <button class="button ghost" id="discardButton" type="button">
+            New
+          </button>
+        </div>
+      </section>
+
+      <section class="panel" id="busyPanel" hidden>
+        <div class="progress">
+          <span class="spinner" aria-hidden="true"></span>
+          <span id="busyText">Working</span>
+        </div>
+      </section>
+
+      <aside class="history-drawer" id="historyDrawer" aria-hidden="true" aria-label="Recording history">
+        <div class="drawer-header">
+          <div>
+            <h2>History</h2>
+            <p>Recent source tabs</p>
+          </div>
+          <button class="icon-button" id="closeHistoryButton" type="button" title="Close history" aria-label="Close history">
+            <span class="close-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+        <div class="history-empty" id="historyEmpty" hidden>
+          Saved recordings will appear here.
+        </div>
+        <button class="clear-history" id="clearHistoryButton" type="button" hidden>
+          Clear history
+        </button>
+      </aside>
+    </main>
+
+    <script src="storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
