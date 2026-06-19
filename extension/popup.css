@@ -297,6 +297,15 @@ body[data-state="saved"] .waveform span {
   margin-top: 12px;
 }
 
+.shortcut-hint {
+  margin: 8px 0 0;
+  color: #a2abb6;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: center;
+}
+
 .button-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

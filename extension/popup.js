@@ -4,6 +4,7 @@ const elements = {
   sourceTitle: document.getElementById("sourceTitle"),
   timer: document.getElementById("timer"),
   errorMessage: document.getElementById("errorMessage"),
+  shortcutHint: document.getElementById("shortcutHint"),
   historyButton: document.getElementById("historyButton"),
   historyDrawer: document.getElementById("historyDrawer"),
   closeHistoryButton: document.getElementById("closeHistoryButton"),
@@ -38,6 +39,7 @@ let isBusy = false;
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
+  renderShortcutHint();
   elements.startButton.addEventListener("click", () => runCommand("START_RECORDING"));
   elements.pauseButton.addEventListener("click", () => runCommand("PAUSE_RECORDING"));
   elements.resumeButton.addEventListener("click", () => runCommand("RESUME_RECORDING"));
@@ -54,6 +56,13 @@ function init() {
 
   refreshState();
   setInterval(updateTimer, 500);
+}
+
+function renderShortcutHint() {
+  const isMac = /Mac|iPhone|iPad|iPod/i.test(navigator.platform || "");
+  elements.shortcutHint.textContent = isMac
+    ? "Shortcut: ⌘⇧Y · Global: Ctrl⇧8"
+    : "Shortcut: Ctrl⇧Y · Global: Ctrl⇧8";
 }
 
 async function refreshState() {
