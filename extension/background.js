@@ -2,6 +2,11 @@ const OFFSCREEN_DOCUMENT = "offscreen.html";
 
 importScripts("classifier.js");
 
+const RECORDING_TOGGLE_COMMANDS = new Set([
+  "toggle-recording",
+  "global-toggle-recording",
+]);
+
 let cachedState = {
   status: "ready",
   statusText: "Ready",
@@ -16,7 +21,7 @@ chrome.runtime.onStartup.addListener(() => {
 });
 
 chrome.commands.onCommand.addListener((command) => {
-  if (command !== "toggle-recording") {
+  if (!RECORDING_TOGGLE_COMMANDS.has(command)) {
     return;
   }
 

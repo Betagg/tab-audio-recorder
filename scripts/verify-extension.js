@@ -58,4 +58,19 @@ if (!command?.suggested_key?.default || !command?.description) {
   process.exit(1);
 }
 
+const globalCommand = manifest.commands?.["global-toggle-recording"];
+if (
+  !globalCommand?.suggested_key?.default ||
+  !globalCommand?.description ||
+  globalCommand.global !== true
+) {
+  console.error("Missing global-toggle-recording command shortcut.");
+  process.exit(1);
+}
+
+if (!/^Ctrl\+Shift\+[0-9]$/.test(globalCommand.suggested_key.default)) {
+  console.error("Global command shortcut must use Ctrl+Shift+[0..9].");
+  process.exit(1);
+}
+
 console.log("Extension files verified.");

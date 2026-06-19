@@ -1,6 +1,6 @@
 {
   "name": "tab-audio-recorder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "A local-only Chrome MV3 extension that records current tab audio and downloads MP3 files.",
   "scripts": {

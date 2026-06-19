@@ -23,7 +23,7 @@ Core features:
 - Generate clean filenames from the page title and date.
 - Keep a local history of saved recordings with source URLs.
 - Use a toolbar REC badge while recording.
-- Toggle recording with a keyboard shortcut.
+- Toggle recording with a Chrome shortcut or a global computer shortcut.
 
 Privacy:
 

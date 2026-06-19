@@ -4,7 +4,7 @@
 
 Use this ZIP file:
 
-`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.0-20260618-171902.zip`
+`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.1-20260619-192726.zip`
 
 The ZIP has `manifest.json` at the archive root and excludes `.DS_Store`.
 
@@ -48,6 +48,4 @@ Optional:
 ## Current Blockers
 
 - A registered Chrome Web Store developer account is required.
-- GitHub repository `betagg/tab-audio-recorder` must be created or made accessible to the current Git credentials. The latest check returned `Repository not found`.
-- GitHub Pages must be enabled for `betagg/tab-audio-recorder` from the `main` branch `/docs` directory before the privacy URL is public.
 - Final submission requires access to the user's Google account and explicit confirmation in the dashboard.

@@ -24,15 +24,18 @@ No screen recording. No video files. No uploads. No accounts.
 6. Click Save MP3.
 7. Use the clock button to open the history sidebar and revisit source URLs.
 
-The default recording toggle shortcut is `Ctrl+Shift+Y` on Windows/Linux and
-`Command+Shift+Y` on macOS. Press once to start, press again to pause, and press
-again to resume. It can be changed at `chrome://extensions/shortcuts`.
+The default Chrome-focused recording toggle shortcut is `Ctrl+Shift+Y` on
+Windows/Linux and `Command+Shift+Y` on macOS. A global computer shortcut is also
+available as `Ctrl+Shift+8`, so recording can be started, paused, or resumed
+even when Chrome is not focused. Shortcuts can be changed at
+`chrome://extensions/shortcuts`.
 
 ## Product Scope
 
 - Records current browser tab audio only.
 - Keeps playback audible while recording.
 - Shows a red `REC` toolbar badge while recording and a yellow `PAU` badge while paused.
+- Supports both Chrome-focused and global computer keyboard shortcuts.
 - Encodes MP3 locally in the extension with `lamejs`.
 - Downloads through `chrome.downloads`.
 - Keeps a local history of recent saved recordings with source URLs.
