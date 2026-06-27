@@ -90,7 +90,7 @@ function init() {
   elements.trimWaveformCanvas.addEventListener("pointerdown", beginWaveformDrag);
   elements.trimWaveformCanvas.addEventListener("pointermove", updateWaveformDrag);
   elements.trimWaveformCanvas.addEventListener("pointerup", endWaveformDrag);
-  elements.trimWaveformCanvas.addEventListener("pointercancel", endWaveformDrag);
+  elements.trimWaveformCanvas.addEventListener("pointercancel", cancelWaveformDrag);
   window.addEventListener("resize", renderWaveform);
   elements.filenameInput.addEventListener("input", () => {
     filenameTouched = true;
@@ -222,6 +222,7 @@ function resetTrimToFull() {
     startMs: 0,
     endMs: trimState.durationMs,
   });
+  playTrimPreviewFromStart();
 }
 
 function setTrimState(nextState) {
@@ -541,6 +542,15 @@ function endWaveformDrag(event) {
   }
   elements.trimWaveformCanvas.releasePointerCapture?.(event.pointerId);
   waveformDragHandle = "";
+  playTrimPreviewFromStart();
+}
+
+function cancelWaveformDrag(event) {
+  if (!waveformDragHandle) {
+    return;
+  }
+  elements.trimWaveformCanvas.releasePointerCapture?.(event.pointerId);
+  waveformDragHandle = "";
 }
 
 function setTrimHandleFromMilliseconds(handle, milliseconds) {
@@ -610,24 +620,27 @@ async function toggleTrimPreview() {
     return;
   }
 
-  const record = await window.TabAudioRecorderStorage.getLatestRecording();
-  if (!record?.blob) {
-    showError("No MP3 recording is ready to preview.");
-    return;
-  }
+  await playTrimPreviewFromStart();
+}
 
-  const trim = getTrimBounds();
-  if (!trim.durationMs) {
-    return;
-  }
-
-  stopPreview();
-  previewObjectUrl = URL.createObjectURL(record.blob);
-  previewAudio = new Audio(previewObjectUrl);
-  previewAudio.currentTime = trim.startMs / 1000;
-  previewAudio.onended = () => stopPreview();
-
+async function playTrimPreviewFromStart() {
   try {
+    const record = await window.TabAudioRecorderStorage.getLatestRecording();
+    if (!record?.blob) {
+      throw new Error("No MP3 recording is ready to preview.");
+    }
+
+    const trim = getTrimBounds();
+    if (!trim.durationMs) {
+      return;
+    }
+
+    stopPreview();
+    previewObjectUrl = URL.createObjectURL(record.blob);
+    previewAudio = new Audio(previewObjectUrl);
+    previewAudio.currentTime = trim.startMs / 1000;
+    previewAudio.onended = () => stopPreview();
+
     await previewAudio.play();
     elements.trimPreviewButton.textContent = "Stop";
     previewCursorMs = trim.startMs;
