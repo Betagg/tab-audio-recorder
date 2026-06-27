@@ -57,6 +57,7 @@ for (const requiredMarkup of [
   "vendor/lame.min.js",
   "trimStartInput",
   "trimEndInput",
+  "trimWaveformCanvas",
   "trimPreviewButton",
 ]) {
   if (!popupHtml.includes(requiredMarkup)) {

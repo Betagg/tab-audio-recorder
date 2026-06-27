@@ -23,6 +23,7 @@ const elements = {
   trimEndInput: document.getElementById("trimEndInput"),
   trimStartTime: document.getElementById("trimStartTime"),
   trimEndTime: document.getElementById("trimEndTime"),
+  trimWaveformCanvas: document.getElementById("trimWaveformCanvas"),
   trimPreviewButton: document.getElementById("trimPreviewButton"),
   trimResetButton: document.getElementById("trimResetButton"),
   filenameInput: document.getElementById("filenameInput"),
@@ -39,6 +40,8 @@ const MP3_KBPS = 128;
 const MP3_CHUNK_SIZE = 1152;
 const MIN_TRIM_MS = 1000;
 const FULL_TRIM_TOLERANCE_MS = 250;
+const WAVEFORM_BUCKETS = 180;
+const WAVEFORM_HEIGHT = 54;
 
 let currentState = {
   status: "ready",
@@ -56,6 +59,18 @@ let trimState = {
 let previewAudio = null;
 let previewObjectUrl = "";
 let previewTimer = 0;
+let previewCursorMs = null;
+let decodedRecording = {
+  key: "",
+  audioBuffer: null,
+};
+let waveformState = {
+  loading: false,
+  peaks: [],
+  error: "",
+};
+let waveformRequestId = 0;
+let waveformDragHandle = "";
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -78,11 +93,17 @@ function init() {
   elements.trimEndInput.addEventListener("input", () => updateTrimSelection("end"));
   elements.trimResetButton.addEventListener("click", resetTrimToFull);
   elements.trimPreviewButton.addEventListener("click", toggleTrimPreview);
+  elements.trimWaveformCanvas.addEventListener("pointerdown", beginWaveformDrag);
+  elements.trimWaveformCanvas.addEventListener("pointermove", updateWaveformDrag);
+  elements.trimWaveformCanvas.addEventListener("pointerup", endWaveformDrag);
+  elements.trimWaveformCanvas.addEventListener("pointercancel", endWaveformDrag);
+  window.addEventListener("resize", renderWaveform);
   elements.filenameInput.addEventListener("input", () => {
     filenameTouched = true;
   });
 
   renderTrimControls();
+  renderWaveform();
   refreshState();
   setInterval(updateTimer, 500);
 }
@@ -163,7 +184,7 @@ async function saveRecording() {
 
     if (shouldExportTrimmedSegment(trim)) {
       elements.statusPill.textContent = "Trimming";
-      blob = await createTrimmedMp3(record.blob, trim.startMs, trim.endMs);
+      blob = await createTrimmedMp3(record, trim.startMs, trim.endMs);
       metadata = {
         ...metadata,
         durationMs: trim.endMs - trim.startMs,
@@ -245,6 +266,7 @@ function setTrimState(nextState) {
 
   trimState = { durationMs, startMs, endMs };
   renderTrimControls();
+  renderWaveform();
 }
 
 function renderTrimControls() {
@@ -279,15 +301,331 @@ function syncTrimFromState() {
     if (trimState.durationMs > 0) {
       setTrimState({ durationMs: 0, startMs: 0, endMs: 0 });
     }
+    clearWaveformState();
     stopPreview();
     return;
   }
 
   if (trimState.durationMs !== durationMs) {
     setTrimState({ durationMs, startMs: 0, endMs: durationMs });
+    loadWaveformForLatestRecording();
   } else {
     renderTrimControls();
+    renderWaveform();
   }
+}
+
+async function loadWaveformForLatestRecording() {
+  const requestId = waveformRequestId + 1;
+  waveformRequestId = requestId;
+  waveformState = {
+    loading: true,
+    peaks: [],
+    error: "",
+  };
+  renderWaveform();
+
+  try {
+    const record = await window.TabAudioRecorderStorage.getLatestRecording();
+    if (!record?.blob) {
+      throw new Error("No recording is ready.");
+    }
+
+    const audioBuffer = await getDecodedAudioBuffer(record);
+    if (requestId !== waveformRequestId) {
+      return;
+    }
+
+    waveformState = {
+      loading: false,
+      peaks: buildWaveformPeaks(audioBuffer),
+      error: "",
+    };
+  } catch {
+    if (requestId !== waveformRequestId) {
+      return;
+    }
+    waveformState = {
+      loading: false,
+      peaks: [],
+      error: "Waveform unavailable",
+    };
+  }
+
+  renderWaveform();
+}
+
+function clearWaveformState() {
+  waveformRequestId += 1;
+  waveformState = {
+    loading: false,
+    peaks: [],
+    error: "",
+  };
+  decodedRecording = {
+    key: "",
+    audioBuffer: null,
+  };
+  renderWaveform();
+}
+
+function buildWaveformPeaks(audioBuffer) {
+  const bucketCount = WAVEFORM_BUCKETS;
+  const peaks = new Array(bucketCount).fill(0);
+  const channelCount = Math.min(2, Math.max(1, audioBuffer.numberOfChannels || 1));
+  const samplesPerBucket = Math.max(1, Math.floor(audioBuffer.length / bucketCount));
+  let maxPeak = 0;
+
+  for (let bucket = 0; bucket < bucketCount; bucket += 1) {
+    const start = bucket * samplesPerBucket;
+    const end = bucket === bucketCount - 1
+      ? audioBuffer.length
+      : Math.min(audioBuffer.length, start + samplesPerBucket);
+    const stride = Math.max(1, Math.floor((end - start) / 80));
+    let peak = 0;
+
+    for (let channel = 0; channel < channelCount; channel += 1) {
+      const data = audioBuffer.getChannelData(channel);
+      for (let index = start; index < end; index += stride) {
+        peak = Math.max(peak, Math.abs(data[index] || 0));
+      }
+    }
+
+    peaks[bucket] = peak;
+    maxPeak = Math.max(maxPeak, peak);
+  }
+
+  if (maxPeak <= 0) {
+    return peaks;
+  }
+
+  return peaks.map((peak) => Math.sqrt(peak / maxPeak));
+}
+
+function renderWaveform() {
+  const canvas = elements.trimWaveformCanvas;
+  if (!canvas) {
+    return;
+  }
+
+  const rect = canvas.getBoundingClientRect();
+  const width = Math.max(1, Math.round(rect.width || canvas.clientWidth || 260));
+  const height = WAVEFORM_HEIGHT;
+  const scale = window.devicePixelRatio || 1;
+
+  if (canvas.width !== Math.round(width * scale)) {
+    canvas.width = Math.round(width * scale);
+  }
+  if (canvas.height !== Math.round(height * scale)) {
+    canvas.height = Math.round(height * scale);
+  }
+
+  const context = canvas.getContext("2d");
+  context.setTransform(scale, 0, 0, scale, 0, 0);
+  context.clearRect(0, 0, width, height);
+
+  drawWaveformBackground(context, width, height);
+
+  if (waveformState.loading) {
+    drawWaveformLoading(context, width, height);
+    return;
+  }
+
+  if (waveformState.error) {
+    drawWaveformMessage(context, width, height, waveformState.error);
+    return;
+  }
+
+  const peaks = waveformState.peaks;
+  if (peaks.length === 0 || trimState.durationMs <= 0) {
+    drawWaveformMessage(context, width, height, "Waveform will appear here");
+    return;
+  }
+
+  drawWaveformBars(context, width, height, peaks);
+  drawWaveformSelection(context, width, height);
+}
+
+function drawWaveformBackground(context, width, height) {
+  context.fillStyle = "#f8fbfe";
+  context.fillRect(0, 0, width, height);
+  context.fillStyle = "#eef4f8";
+  context.fillRect(0, height / 2, width, 1);
+}
+
+function drawWaveformLoading(context, width, height) {
+  const bars = 36;
+  const gap = 3;
+  const barWidth = Math.max(2, Math.floor((width - gap * (bars - 1)) / bars));
+
+  context.strokeStyle = "#cbd6e2";
+  context.lineWidth = barWidth;
+  context.lineCap = "round";
+
+  for (let index = 0; index < bars; index += 1) {
+    const x = index * (barWidth + gap) + barWidth / 2;
+    const wave = Math.sin(index * 0.72) * 0.5 + 0.5;
+    const amplitude = 8 + wave * 24;
+    context.globalAlpha = 0.3 + wave * 0.32;
+    drawWaveformBar(context, x, height / 2, amplitude);
+  }
+
+  context.globalAlpha = 1;
+}
+
+function drawWaveformMessage(context, width, height, message) {
+  context.fillStyle = "#9aa4b0";
+  context.font = "650 11px system-ui, -apple-system, BlinkMacSystemFont, sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(message, width / 2, height / 2);
+}
+
+function drawWaveformBars(context, width, height, peaks) {
+  const centerY = height / 2;
+  const barGap = 1.4;
+  const barWidth = Math.max(1.4, width / peaks.length - barGap);
+  const startX = timeToWaveformX(trimState.startMs, width);
+  const endX = timeToWaveformX(trimState.endMs, width);
+
+  context.lineCap = "round";
+  context.lineWidth = barWidth;
+
+  for (let index = 0; index < peaks.length; index += 1) {
+    const x = index * (barWidth + barGap) + barWidth / 2;
+    const amplitude = Math.max(3, peaks[index] * (height - 16));
+    context.strokeStyle =
+      x >= startX && x <= endX ? "#13b8c8" : "#b7c5d2";
+    drawWaveformBar(context, x, centerY, amplitude);
+  }
+}
+
+function drawWaveformSelection(context, width, height) {
+  const startX = timeToWaveformX(trimState.startMs, width);
+  const endX = timeToWaveformX(trimState.endMs, width);
+
+  context.save();
+  context.fillStyle = "rgba(19, 184, 200, 0.13)";
+  context.fillRect(startX, 0, Math.max(1, endX - startX), height);
+
+  context.fillStyle = "rgba(248, 251, 254, 0.58)";
+  context.fillRect(0, 0, startX, height);
+  context.fillRect(endX, 0, Math.max(0, width - endX), height);
+
+  drawWaveformHandle(context, startX, height, "#ff5f3d");
+  drawWaveformHandle(context, endX, height, "#ff5f3d");
+  drawWaveformPlayhead(context, width, height);
+  context.restore();
+}
+
+function drawWaveformBar(context, x, centerY, amplitude) {
+  context.beginPath();
+  context.moveTo(x, centerY - amplitude / 2);
+  context.lineTo(x, centerY + amplitude / 2);
+  context.stroke();
+}
+
+function drawWaveformHandle(context, x, height, color) {
+  context.strokeStyle = color;
+  context.lineWidth = 2;
+  context.beginPath();
+  context.moveTo(x, 5);
+  context.lineTo(x, height - 5);
+  context.stroke();
+
+  context.fillStyle = color;
+  context.beginPath();
+  context.roundRect?.(x - 4, 4, 8, 8, 3);
+  if (!context.roundRect) {
+    context.rect(x - 4, 4, 8, 8);
+  }
+  context.fill();
+}
+
+function drawWaveformPlayhead(context, width, height) {
+  if (previewCursorMs === null) {
+    return;
+  }
+
+  const x = timeToWaveformX(previewCursorMs, width);
+  context.strokeStyle = "#141a22";
+  context.lineWidth = 1.5;
+  context.beginPath();
+  context.moveTo(x, 6);
+  context.lineTo(x, height - 6);
+  context.stroke();
+}
+
+function beginWaveformDrag(event) {
+  if (isBusy || trimState.durationMs <= 0) {
+    return;
+  }
+
+  stopPreview();
+  const milliseconds = waveformEventToMilliseconds(event);
+  waveformDragHandle = getNearestTrimHandle(milliseconds);
+  elements.trimWaveformCanvas.setPointerCapture?.(event.pointerId);
+  setTrimHandleFromMilliseconds(waveformDragHandle, milliseconds);
+}
+
+function updateWaveformDrag(event) {
+  if (!waveformDragHandle) {
+    return;
+  }
+  setTrimHandleFromMilliseconds(
+    waveformDragHandle,
+    waveformEventToMilliseconds(event)
+  );
+}
+
+function endWaveformDrag(event) {
+  if (!waveformDragHandle) {
+    return;
+  }
+  elements.trimWaveformCanvas.releasePointerCapture?.(event.pointerId);
+  waveformDragHandle = "";
+}
+
+function setTrimHandleFromMilliseconds(handle, milliseconds) {
+  const durationMs = trimState.durationMs;
+  const minimumGap = Math.min(MIN_TRIM_MS, durationMs);
+  const nextMs = clamp(Math.round(milliseconds), 0, durationMs);
+
+  if (handle === "start") {
+    setTrimState({
+      durationMs,
+      startMs: Math.min(nextMs, trimState.endMs - minimumGap),
+      endMs: trimState.endMs,
+    });
+    return;
+  }
+
+  setTrimState({
+    durationMs,
+    startMs: trimState.startMs,
+    endMs: Math.max(nextMs, trimState.startMs + minimumGap),
+  });
+}
+
+function getNearestTrimHandle(milliseconds) {
+  const startDistance = Math.abs(milliseconds - trimState.startMs);
+  const endDistance = Math.abs(milliseconds - trimState.endMs);
+  return startDistance <= endDistance ? "start" : "end";
+}
+
+function waveformEventToMilliseconds(event) {
+  const rect = elements.trimWaveformCanvas.getBoundingClientRect();
+  const ratio = rect.width > 0
+    ? clamp((event.clientX - rect.left) / rect.width, 0, 1)
+    : 0;
+  return ratio * trimState.durationMs;
+}
+
+function timeToWaveformX(milliseconds, width) {
+  if (trimState.durationMs <= 0) {
+    return 0;
+  }
+  return clamp(milliseconds / trimState.durationMs, 0, 1) * width;
 }
 
 function getTrimBounds() {
@@ -335,10 +673,15 @@ async function toggleTrimPreview() {
   try {
     await previewAudio.play();
     elements.trimPreviewButton.textContent = "Stop";
+    previewCursorMs = trim.startMs;
+    renderWaveform();
     previewTimer = window.setInterval(() => {
       if (!previewAudio || previewAudio.currentTime >= trim.endMs / 1000) {
         stopPreview();
+        return;
       }
+      previewCursorMs = previewAudio.currentTime * 1000;
+      renderWaveform();
     }, 80);
   } catch (error) {
     stopPreview();
@@ -362,16 +705,19 @@ function stopPreview() {
     URL.revokeObjectURL(previewObjectUrl);
     previewObjectUrl = "";
   }
+  previewCursorMs = null;
   elements.trimPreviewButton.textContent = "Preview";
+  renderWaveform();
 }
 
-async function createTrimmedMp3(sourceBlob, startMs, endMs) {
-  const Mp3Encoder = window.lamejs?.Mp3Encoder;
+async function getDecodedAudioBuffer(record) {
   const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+  const recordingKey = getRecordingKey(record);
 
-  if (!Mp3Encoder) {
-    throw new Error("MP3 encoder is not available.");
+  if (decodedRecording.key === recordingKey && decodedRecording.audioBuffer) {
+    return decodedRecording.audioBuffer;
   }
+
   if (!AudioContextConstructor) {
     throw new Error("Audio decoding is not available in this browser.");
   }
@@ -379,12 +725,35 @@ async function createTrimmedMp3(sourceBlob, startMs, endMs) {
   const audioContext = new AudioContextConstructor();
 
   try {
-    const arrayBuffer = await sourceBlob.arrayBuffer();
+    const arrayBuffer = await record.blob.arrayBuffer();
     const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-    return await encodeAudioBufferSegment(audioBuffer, startMs, endMs, Mp3Encoder);
+    decodedRecording = {
+      key: recordingKey,
+      audioBuffer,
+    };
+    return audioBuffer;
   } finally {
     await audioContext.close().catch(() => {});
   }
+}
+
+function getRecordingKey(record) {
+  return [
+    record?.savedAt || 0,
+    record?.blob?.size || 0,
+    record?.metadata?.durationMs || 0,
+  ].join(":");
+}
+
+async function createTrimmedMp3(record, startMs, endMs) {
+  const Mp3Encoder = window.lamejs?.Mp3Encoder;
+
+  if (!Mp3Encoder) {
+    throw new Error("MP3 encoder is not available.");
+  }
+
+  const audioBuffer = await getDecodedAudioBuffer(record);
+  return await encodeAudioBufferSegment(audioBuffer, startMs, endMs, Mp3Encoder);
 }
 
 async function encodeAudioBufferSegment(audioBuffer, startMs, endMs, Mp3Encoder) {

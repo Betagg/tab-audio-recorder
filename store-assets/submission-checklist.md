@@ -4,7 +4,7 @@
 
 Use this ZIP file:
 
-`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.3-20260627-161741.zip`
+`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.4-20260627-163340.zip`
 
 The ZIP has `manifest.json` at the archive root and excludes `.DS_Store`.
 

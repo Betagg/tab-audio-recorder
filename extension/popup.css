@@ -488,6 +488,16 @@ body[data-state="saved"] .waveform span {
   opacity: 0.58;
 }
 
+.trim-waveform {
+  display: block;
+  width: 100%;
+  height: 54px;
+  border: 1px solid #dfe6ee;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f8fbfe 0%, #eef4f8 100%);
+  cursor: crosshair;
+}
+
 .trim-row {
   display: grid;
   grid-template-columns: 34px minmax(0, 1fr) 46px;

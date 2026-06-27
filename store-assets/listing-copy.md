@@ -18,7 +18,7 @@ Core features:
 
 - Record current tab audio.
 - Pause, resume, and stop at any time.
-- Trim the keep segment before saving.
+- Trim the keep segment with a local waveform view before saving.
 - Export directly as MP3.
 - Edit the suggested filename before saving.
 - Generate clean filenames from the page title and date.
