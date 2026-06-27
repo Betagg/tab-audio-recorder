@@ -18,6 +18,7 @@ Core features:
 
 - Record current tab audio.
 - Pause, resume, and stop at any time.
+- Trim the keep segment before saving.
 - Export directly as MP3.
 - Edit the suggested filename before saving.
 - Generate clean filenames from the page title and date.
@@ -88,8 +89,9 @@ Limited use certifications:
 4. Click Start Recording.
 5. Let the tab play audio for a few seconds.
 6. Pause, resume, and stop the recording.
-7. Edit the filename if desired.
-8. Click Save MP3 and confirm that an MP3 file downloads.
-9. Open the history drawer and confirm that the source URL is listed.
+7. Adjust the keep segment and preview it if desired.
+8. Edit the filename if desired.
+9. Click Save MP3 and confirm that an MP3 file downloads.
+10. Open the history drawer and confirm that the source URL is listed.
 
 No test account is required.

@@ -17,6 +17,14 @@ const elements = {
   savePanel: document.getElementById("savePanel"),
   busyPanel: document.getElementById("busyPanel"),
   busyText: document.getElementById("busyText"),
+  trimEditor: document.getElementById("trimEditor"),
+  trimDuration: document.getElementById("trimDuration"),
+  trimStartInput: document.getElementById("trimStartInput"),
+  trimEndInput: document.getElementById("trimEndInput"),
+  trimStartTime: document.getElementById("trimStartTime"),
+  trimEndTime: document.getElementById("trimEndTime"),
+  trimPreviewButton: document.getElementById("trimPreviewButton"),
+  trimResetButton: document.getElementById("trimResetButton"),
   filenameInput: document.getElementById("filenameInput"),
   startButton: document.getElementById("startButton"),
   pauseButton: document.getElementById("pauseButton"),
@@ -27,6 +35,11 @@ const elements = {
   discardButton: document.getElementById("discardButton"),
 };
 
+const MP3_KBPS = 128;
+const MP3_CHUNK_SIZE = 1152;
+const MIN_TRIM_MS = 1000;
+const FULL_TRIM_TOLERANCE_MS = 250;
+
 let currentState = {
   status: "ready",
   statusText: "Ready",
@@ -35,6 +48,14 @@ let currentState = {
 let stateReceivedAt = Date.now();
 let filenameTouched = false;
 let isBusy = false;
+let trimState = {
+  durationMs: 0,
+  startMs: 0,
+  endMs: 0,
+};
+let previewAudio = null;
+let previewObjectUrl = "";
+let previewTimer = 0;
 
 document.addEventListener("DOMContentLoaded", init);
 
@@ -45,15 +66,23 @@ function init() {
   elements.resumeButton.addEventListener("click", () => runCommand("RESUME_RECORDING"));
   elements.stopButton.addEventListener("click", () => runCommand("STOP_RECORDING"));
   elements.stopPausedButton.addEventListener("click", () => runCommand("STOP_RECORDING"));
-  elements.discardButton.addEventListener("click", () => runCommand("DISCARD_RECORDING"));
+  elements.discardButton.addEventListener("click", () => {
+    stopPreview();
+    runCommand("DISCARD_RECORDING");
+  });
   elements.saveButton.addEventListener("click", saveRecording);
   elements.historyButton.addEventListener("click", openHistoryDrawer);
   elements.closeHistoryButton.addEventListener("click", closeHistoryDrawer);
   elements.clearHistoryButton.addEventListener("click", clearHistory);
+  elements.trimStartInput.addEventListener("input", () => updateTrimSelection("start"));
+  elements.trimEndInput.addEventListener("input", () => updateTrimSelection("end"));
+  elements.trimResetButton.addEventListener("click", resetTrimToFull);
+  elements.trimPreviewButton.addEventListener("click", toggleTrimPreview);
   elements.filenameInput.addEventListener("input", () => {
     filenameTouched = true;
   });
 
+  renderTrimControls();
   refreshState();
   setInterval(updateTimer, 500);
 }
@@ -114,7 +143,9 @@ function applyOptimisticState(type) {
 }
 
 async function saveRecording() {
+  stopPreview();
   setBusy(true);
+  const previousStatusText = elements.statusPill.textContent;
   try {
     const record = await window.TabAudioRecorderStorage.getLatestRecording();
     if (!record?.blob) {
@@ -126,10 +157,30 @@ async function saveRecording() {
         record.metadata?.suggestedFilename ||
         "tab-audio-recording.mp3"
     );
-    const url = URL.createObjectURL(record.blob);
+    const trim = getTrimBounds();
+    let blob = record.blob;
+    let metadata = record.metadata || {};
+
+    if (shouldExportTrimmedSegment(trim)) {
+      elements.statusPill.textContent = "Trimming";
+      blob = await createTrimmedMp3(record.blob, trim.startMs, trim.endMs);
+      metadata = {
+        ...metadata,
+        durationMs: trim.endMs - trim.startMs,
+        originalDurationMs: metadata.durationMs || trim.durationMs,
+        trimStartMs: trim.startMs,
+        trimEndMs: trim.endMs,
+        trimmed: true,
+        size: blob.size,
+        mimeType: "audio/mpeg",
+      };
+    }
+
+    elements.statusPill.textContent = "Saving";
+    const url = URL.createObjectURL(blob);
 
     await downloadFile(url, filename);
-    await window.TabAudioRecorderStorage.addHistoryEntry(record.metadata, filename);
+    await window.TabAudioRecorderStorage.addHistoryEntry(metadata, filename);
     if (elements.body.dataset.historyOpen === "true") {
       await renderHistory();
     }
@@ -138,12 +189,271 @@ async function saveRecording() {
     const response = await chrome.runtime.sendMessage({ type: "MARK_SAVED" });
     if (response?.ok) {
       applyState(response.state);
+    } else {
+      elements.statusPill.textContent = previousStatusText;
     }
   } catch (error) {
+    elements.statusPill.textContent = previousStatusText;
     showError(error.message);
   } finally {
     setBusy(false);
   }
+}
+
+function resetTrimToFull() {
+  stopPreview();
+  setTrimState({
+    durationMs: trimState.durationMs,
+    startMs: 0,
+    endMs: trimState.durationMs,
+  });
+}
+
+function updateTrimSelection(changedHandle) {
+  stopPreview();
+
+  const durationMs = trimState.durationMs;
+  if (durationMs <= 0) {
+    setTrimState({ durationMs: 0, startMs: 0, endMs: 0 });
+    return;
+  }
+
+  const minimumGap = Math.min(MIN_TRIM_MS, durationMs);
+  let startMs = Number(elements.trimStartInput.value) || 0;
+  let endMs = Number(elements.trimEndInput.value) || durationMs;
+
+  startMs = clamp(startMs, 0, durationMs);
+  endMs = clamp(endMs, 0, durationMs);
+
+  if (changedHandle === "start" && startMs > endMs - minimumGap) {
+    startMs = Math.max(0, endMs - minimumGap);
+  }
+  if (changedHandle === "end" && endMs < startMs + minimumGap) {
+    endMs = Math.min(durationMs, startMs + minimumGap);
+  }
+  if (startMs > endMs) {
+    [startMs, endMs] = [endMs, startMs];
+  }
+
+  setTrimState({ durationMs, startMs, endMs });
+}
+
+function setTrimState(nextState) {
+  const durationMs = Math.max(0, Math.round(nextState.durationMs || 0));
+  const startMs = clamp(Math.round(nextState.startMs || 0), 0, durationMs);
+  const endMs = clamp(Math.round(nextState.endMs || durationMs), startMs, durationMs);
+
+  trimState = { durationMs, startMs, endMs };
+  renderTrimControls();
+}
+
+function renderTrimControls() {
+  const durationMs = trimState.durationMs;
+  const canSelect = durationMs > 0;
+  const isFullSelection = !shouldExportTrimmedSegment(getTrimBounds());
+  const selectedMs = Math.max(0, trimState.endMs - trimState.startMs);
+
+  elements.trimStartInput.max = String(durationMs);
+  elements.trimEndInput.max = String(durationMs);
+  elements.trimStartInput.value = String(trimState.startMs);
+  elements.trimEndInput.value = String(trimState.endMs);
+  elements.trimStartTime.textContent = formatTrimTime(trimState.startMs);
+  elements.trimEndTime.textContent = formatTrimTime(trimState.endMs);
+  elements.trimDuration.textContent = canSelect
+    ? `Keep ${formatTrimTime(selectedMs)} of ${formatTrimTime(durationMs)}`
+    : "Full recording";
+
+  elements.trimStartInput.disabled = isBusy || !canSelect;
+  elements.trimEndInput.disabled = isBusy || !canSelect;
+  elements.trimPreviewButton.disabled = isBusy || !canSelect;
+  elements.trimResetButton.disabled = isBusy || !canSelect || isFullSelection;
+}
+
+function syncTrimFromState() {
+  const metadata = currentState.metadata || {};
+  const durationMs = Math.round(
+    currentState.recording?.durationMs || metadata.durationMs || currentState.elapsedMs || 0
+  );
+
+  if (currentState.status !== "ready_to_save") {
+    if (trimState.durationMs > 0) {
+      setTrimState({ durationMs: 0, startMs: 0, endMs: 0 });
+    }
+    stopPreview();
+    return;
+  }
+
+  if (trimState.durationMs !== durationMs) {
+    setTrimState({ durationMs, startMs: 0, endMs: durationMs });
+  } else {
+    renderTrimControls();
+  }
+}
+
+function getTrimBounds() {
+  return {
+    durationMs: trimState.durationMs,
+    startMs: trimState.startMs,
+    endMs: trimState.endMs,
+  };
+}
+
+function shouldExportTrimmedSegment(trim) {
+  if (!trim.durationMs || trim.durationMs <= 0) {
+    return false;
+  }
+
+  return (
+    trim.startMs > FULL_TRIM_TOLERANCE_MS ||
+    trim.endMs < trim.durationMs - FULL_TRIM_TOLERANCE_MS
+  );
+}
+
+async function toggleTrimPreview() {
+  if (previewAudio && !previewAudio.paused) {
+    stopPreview();
+    return;
+  }
+
+  const record = await window.TabAudioRecorderStorage.getLatestRecording();
+  if (!record?.blob) {
+    showError("No MP3 recording is ready to preview.");
+    return;
+  }
+
+  const trim = getTrimBounds();
+  if (!trim.durationMs) {
+    return;
+  }
+
+  stopPreview();
+  previewObjectUrl = URL.createObjectURL(record.blob);
+  previewAudio = new Audio(previewObjectUrl);
+  previewAudio.currentTime = trim.startMs / 1000;
+  previewAudio.onended = () => stopPreview();
+
+  try {
+    await previewAudio.play();
+    elements.trimPreviewButton.textContent = "Stop";
+    previewTimer = window.setInterval(() => {
+      if (!previewAudio || previewAudio.currentTime >= trim.endMs / 1000) {
+        stopPreview();
+      }
+    }, 80);
+  } catch (error) {
+    stopPreview();
+    showError(error.message);
+  }
+}
+
+function stopPreview() {
+  if (previewTimer) {
+    window.clearInterval(previewTimer);
+    previewTimer = 0;
+  }
+  if (previewAudio) {
+    previewAudio.pause();
+    previewAudio.removeAttribute("src");
+    previewAudio.onended = null;
+    previewAudio.load();
+    previewAudio = null;
+  }
+  if (previewObjectUrl) {
+    URL.revokeObjectURL(previewObjectUrl);
+    previewObjectUrl = "";
+  }
+  elements.trimPreviewButton.textContent = "Preview";
+}
+
+async function createTrimmedMp3(sourceBlob, startMs, endMs) {
+  const Mp3Encoder = window.lamejs?.Mp3Encoder;
+  const AudioContextConstructor = window.AudioContext || window.webkitAudioContext;
+
+  if (!Mp3Encoder) {
+    throw new Error("MP3 encoder is not available.");
+  }
+  if (!AudioContextConstructor) {
+    throw new Error("Audio decoding is not available in this browser.");
+  }
+
+  const audioContext = new AudioContextConstructor();
+
+  try {
+    const arrayBuffer = await sourceBlob.arrayBuffer();
+    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    return await encodeAudioBufferSegment(audioBuffer, startMs, endMs, Mp3Encoder);
+  } finally {
+    await audioContext.close().catch(() => {});
+  }
+}
+
+async function encodeAudioBufferSegment(audioBuffer, startMs, endMs, Mp3Encoder) {
+  const channelCount = Math.min(2, Math.max(1, audioBuffer.numberOfChannels || 1));
+  const sampleRate = audioBuffer.sampleRate;
+  const startFrame = clamp(
+    Math.floor((startMs / 1000) * sampleRate),
+    0,
+    audioBuffer.length
+  );
+  const endFrame = clamp(
+    Math.ceil((endMs / 1000) * sampleRate),
+    startFrame + 1,
+    audioBuffer.length
+  );
+  const frameCount = endFrame - startFrame;
+
+  if (frameCount <= 0) {
+    throw new Error("Select a longer audio segment before saving.");
+  }
+
+  const leftChannel = audioBuffer.getChannelData(0);
+  const rightChannel =
+    channelCount > 1 ? audioBuffer.getChannelData(1) : leftChannel;
+  const encoder = new Mp3Encoder(channelCount, sampleRate, MP3_KBPS);
+  const mp3Parts = [];
+
+  for (let offset = 0; offset < frameCount; offset += MP3_CHUNK_SIZE) {
+    const chunkStart = startFrame + offset;
+    const chunkEnd = Math.min(endFrame, chunkStart + MP3_CHUNK_SIZE);
+    const left = floatToInt16(leftChannel.subarray(chunkStart, chunkEnd));
+    const encoded =
+      channelCount > 1
+        ? encoder.encodeBuffer(
+            left,
+            floatToInt16(rightChannel.subarray(chunkStart, chunkEnd))
+          )
+        : encoder.encodeBuffer(left);
+
+    if (encoded.length > 0) {
+      mp3Parts.push(encoded);
+    }
+
+    if (offset % (MP3_CHUNK_SIZE * 80) === 0) {
+      await waitForNextFrame();
+    }
+  }
+
+  const flushed = encoder.flush();
+  if (flushed.length > 0) {
+    mp3Parts.push(flushed);
+  }
+
+  return new Blob(mp3Parts, { type: "audio/mpeg" });
+}
+
+function floatToInt16(floatBuffer) {
+  const intBuffer = new Int16Array(floatBuffer.length);
+
+  for (let index = 0; index < floatBuffer.length; index += 1) {
+    const sample = Math.max(-1, Math.min(1, floatBuffer[index]));
+    intBuffer[index] = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+  }
+
+  return intBuffer;
+}
+
+function waitForNextFrame() {
+  return new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
 async function openHistoryDrawer() {
@@ -241,6 +551,7 @@ function applyState(state) {
   if (currentState.status === "recording") {
     filenameTouched = false;
   }
+  syncTrimFromState();
 
   renderPanels();
   updateTimer();
@@ -280,9 +591,10 @@ function showError(message) {
 
 function setBusy(nextBusy) {
   isBusy = nextBusy;
-  for (const button of document.querySelectorAll("button")) {
-    button.disabled = isBusy;
+  for (const control of document.querySelectorAll("button, input")) {
+    control.disabled = isBusy;
   }
+  renderTrimControls();
 }
 
 function normalizeFilename(value) {
@@ -354,6 +666,20 @@ function formatDuration(milliseconds) {
   return `${pad(minutes)}:${pad(seconds)}`;
 }
 
+function formatTrimTime(milliseconds) {
+  const safeMilliseconds = Math.max(0, Math.round(milliseconds || 0));
+  const totalSeconds = Math.floor(safeMilliseconds / 1000);
+  const tenths = Math.floor((safeMilliseconds % 1000) / 100);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${pad(minutes)}:${pad(seconds)}.${tenths}`;
+  }
+  return `${minutes}:${pad(seconds)}.${tenths}`;
+}
+
 function formatDateTime(timestamp) {
   if (!timestamp) {
     return "";
@@ -382,4 +708,8 @@ function formatUrl(url) {
 
 function pad(value) {
   return String(value).padStart(2, "0");
+}
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
 }

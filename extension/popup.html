@@ -78,6 +78,32 @@
       </section>
 
       <section class="panel save-panel" id="savePanel" hidden>
+        <div class="trim-editor" id="trimEditor">
+          <div class="trim-header">
+            <div>
+              <div class="trim-title">Keep segment</div>
+              <div class="trim-duration" id="trimDuration">Full recording</div>
+            </div>
+            <div class="trim-actions">
+              <button class="trim-action" id="trimPreviewButton" type="button">
+                Preview
+              </button>
+              <button class="trim-action" id="trimResetButton" type="button">
+                Full
+              </button>
+            </div>
+          </div>
+          <label class="trim-row">
+            <span class="trim-label">Start</span>
+            <input id="trimStartInput" type="range" min="0" max="0" step="100" value="0">
+            <span class="trim-time" id="trimStartTime">0:00.0</span>
+          </label>
+          <label class="trim-row">
+            <span class="trim-label">End</span>
+            <input id="trimEndInput" type="range" min="0" max="0" step="100" value="0">
+            <span class="trim-time" id="trimEndTime">0:00.0</span>
+          </label>
+        </div>
         <label class="field">
           <span>Filename</span>
           <input id="filenameInput" type="text" spellcheck="false">
@@ -120,6 +146,7 @@
       </aside>
     </main>
 
+    <script src="vendor/lame.min.js"></script>
     <script src="storage.js"></script>
     <script src="popup.js"></script>
   </body>

@@ -94,6 +94,10 @@
       hostname: metadata?.hostname || "",
       category: metadata?.category || "Audio",
       durationMs: metadata?.durationMs || 0,
+      originalDurationMs: metadata?.originalDurationMs || metadata?.durationMs || 0,
+      trimStartMs: metadata?.trimStartMs || 0,
+      trimEndMs: metadata?.trimEndMs || metadata?.durationMs || 0,
+      trimmed: Boolean(metadata?.trimmed),
       filename: filename || metadata?.suggestedFilename || "tab-audio-recording.mp3",
     };
 

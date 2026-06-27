@@ -20,9 +20,10 @@ No screen recording. No video files. No uploads. No accounts.
 2. Click the Tab Audio Recorder extension.
 3. Click Start Recording.
 4. Pause, resume, or stop when needed.
-5. Edit the suggested filename.
-6. Click Save MP3.
-7. Use the clock button to open the history sidebar and revisit source URLs.
+5. Adjust the keep segment if you only want part of the recording.
+6. Edit the suggested filename.
+7. Click Save MP3.
+8. Use the clock button to open the history sidebar and revisit source URLs.
 
 The default Chrome-focused recording toggle shortcut is `Ctrl+Shift+Y` on
 Windows/Linux and `Command+Shift+Y` on macOS. A global computer shortcut is also
@@ -37,6 +38,7 @@ even when Chrome is not focused. Shortcuts can be changed at
 - Shows a red `REC` toolbar badge while recording and a yellow `PAU` badge while paused.
 - Supports both Chrome-focused and global computer keyboard shortcuts.
 - Encodes MP3 locally in the extension with `lamejs`.
+- Lets users trim the saved segment before downloading.
 - Downloads through `chrome.downloads`.
 - Keeps a local history of recent saved recordings with source URLs.
 - Stores no account data and sends no recordings to any server.

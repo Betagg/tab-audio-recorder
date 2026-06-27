@@ -52,6 +52,19 @@ if (manifest.permissions.includes("tabs")) {
   process.exit(1);
 }
 
+const popupHtml = fs.readFileSync(path.join(root, "extension/popup.html"), "utf8");
+for (const requiredMarkup of [
+  "vendor/lame.min.js",
+  "trimStartInput",
+  "trimEndInput",
+  "trimPreviewButton",
+]) {
+  if (!popupHtml.includes(requiredMarkup)) {
+    console.error(`Popup is missing save-trim support: ${requiredMarkup}`);
+    process.exit(1);
+  }
+}
+
 const command = manifest.commands?.["toggle-recording"];
 if (!command?.suggested_key?.default || !command?.description) {
   console.error("Missing toggle-recording command shortcut.");

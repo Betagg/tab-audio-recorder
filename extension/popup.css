@@ -430,6 +430,98 @@ body[data-state="saved"] .waveform span {
   gap: 10px;
 }
 
+.trim-editor {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.trim-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.trim-title {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 780;
+}
+
+.trim-duration {
+  margin-top: 1px;
+  color: #9aa4b0;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.trim-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+
+.trim-action {
+  min-height: 26px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 0 9px;
+  background: #ffffff;
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 760;
+  cursor: pointer;
+}
+
+.trim-action:hover:not(:disabled) {
+  border-color: #c7d0db;
+  color: var(--ink);
+}
+
+.trim-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.trim-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 46px;
+  align-items: center;
+  gap: 7px;
+}
+
+.trim-label,
+.trim-time {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 720;
+}
+
+.trim-time {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+input[type="range"] {
+  height: 18px;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  accent-color: var(--cyan);
+}
+
+input[type="range"]:focus {
+  border-color: transparent;
+  outline: 2px solid rgba(19, 184, 200, 0.18);
+  outline-offset: 2px;
+}
+
 .field {
   display: grid;
   gap: 6px;
