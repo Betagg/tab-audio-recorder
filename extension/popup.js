@@ -19,10 +19,6 @@ const elements = {
   busyText: document.getElementById("busyText"),
   trimEditor: document.getElementById("trimEditor"),
   trimDuration: document.getElementById("trimDuration"),
-  trimStartInput: document.getElementById("trimStartInput"),
-  trimEndInput: document.getElementById("trimEndInput"),
-  trimStartTime: document.getElementById("trimStartTime"),
-  trimEndTime: document.getElementById("trimEndTime"),
   trimWaveformCanvas: document.getElementById("trimWaveformCanvas"),
   trimPreviewButton: document.getElementById("trimPreviewButton"),
   trimResetButton: document.getElementById("trimResetButton"),
@@ -89,8 +85,6 @@ function init() {
   elements.historyButton.addEventListener("click", openHistoryDrawer);
   elements.closeHistoryButton.addEventListener("click", closeHistoryDrawer);
   elements.clearHistoryButton.addEventListener("click", clearHistory);
-  elements.trimStartInput.addEventListener("input", () => updateTrimSelection("start"));
-  elements.trimEndInput.addEventListener("input", () => updateTrimSelection("end"));
   elements.trimResetButton.addEventListener("click", resetTrimToFull);
   elements.trimPreviewButton.addEventListener("click", toggleTrimPreview);
   elements.trimWaveformCanvas.addEventListener("pointerdown", beginWaveformDrag);
@@ -230,35 +224,6 @@ function resetTrimToFull() {
   });
 }
 
-function updateTrimSelection(changedHandle) {
-  stopPreview();
-
-  const durationMs = trimState.durationMs;
-  if (durationMs <= 0) {
-    setTrimState({ durationMs: 0, startMs: 0, endMs: 0 });
-    return;
-  }
-
-  const minimumGap = Math.min(MIN_TRIM_MS, durationMs);
-  let startMs = Number(elements.trimStartInput.value) || 0;
-  let endMs = Number(elements.trimEndInput.value) || durationMs;
-
-  startMs = clamp(startMs, 0, durationMs);
-  endMs = clamp(endMs, 0, durationMs);
-
-  if (changedHandle === "start" && startMs > endMs - minimumGap) {
-    startMs = Math.max(0, endMs - minimumGap);
-  }
-  if (changedHandle === "end" && endMs < startMs + minimumGap) {
-    endMs = Math.min(durationMs, startMs + minimumGap);
-  }
-  if (startMs > endMs) {
-    [startMs, endMs] = [endMs, startMs];
-  }
-
-  setTrimState({ durationMs, startMs, endMs });
-}
-
 function setTrimState(nextState) {
   const durationMs = Math.max(0, Math.round(nextState.durationMs || 0));
   const startMs = clamp(Math.round(nextState.startMs || 0), 0, durationMs);
@@ -275,18 +240,10 @@ function renderTrimControls() {
   const isFullSelection = !shouldExportTrimmedSegment(getTrimBounds());
   const selectedMs = Math.max(0, trimState.endMs - trimState.startMs);
 
-  elements.trimStartInput.max = String(durationMs);
-  elements.trimEndInput.max = String(durationMs);
-  elements.trimStartInput.value = String(trimState.startMs);
-  elements.trimEndInput.value = String(trimState.endMs);
-  elements.trimStartTime.textContent = formatTrimTime(trimState.startMs);
-  elements.trimEndTime.textContent = formatTrimTime(trimState.endMs);
   elements.trimDuration.textContent = canSelect
     ? `Keep ${formatTrimTime(selectedMs)} of ${formatTrimTime(durationMs)}`
     : "Full recording";
 
-  elements.trimStartInput.disabled = isBusy || !canSelect;
-  elements.trimEndInput.disabled = isBusy || !canSelect;
   elements.trimPreviewButton.disabled = isBusy || !canSelect;
   elements.trimResetButton.disabled = isBusy || !canSelect || isFullSelection;
 }

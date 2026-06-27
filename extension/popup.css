@@ -498,40 +498,6 @@ body[data-state="saved"] .waveform span {
   cursor: crosshair;
 }
 
-.trim-row {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 46px;
-  align-items: center;
-  gap: 7px;
-}
-
-.trim-label,
-.trim-time {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 720;
-}
-
-.trim-time {
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-}
-
-input[type="range"] {
-  height: 18px;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background: transparent;
-  accent-color: var(--cyan);
-}
-
-input[type="range"]:focus {
-  border-color: transparent;
-  outline: 2px solid rgba(19, 184, 200, 0.18);
-  outline-offset: 2px;
-}
-
 .field {
   display: grid;
   gap: 6px;

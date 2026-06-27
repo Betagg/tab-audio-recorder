@@ -55,8 +55,6 @@ if (manifest.permissions.includes("tabs")) {
 const popupHtml = fs.readFileSync(path.join(root, "extension/popup.html"), "utf8");
 for (const requiredMarkup of [
   "vendor/lame.min.js",
-  "trimStartInput",
-  "trimEndInput",
   "trimWaveformCanvas",
   "trimPreviewButton",
 ]) {
