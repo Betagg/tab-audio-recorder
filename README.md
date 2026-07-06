@@ -1,4 +1,4 @@
-# Tab Audio Recorder
+# Dolphin Tab Audio Recorder
 
 Record audio from the current Chrome tab and save it directly as an MP3.
 
@@ -17,7 +17,7 @@ No screen recording. No video files. No uploads. No accounts.
 ## Use
 
 1. Open a tab that is playing audio.
-2. Click the Tab Audio Recorder extension.
+2. Click the Dolphin Tab Audio Recorder extension.
 3. Click Start Recording.
 4. Pause, resume, or stop when needed.
 5. Adjust the keep segment if you only want part of the recording.

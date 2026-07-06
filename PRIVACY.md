@@ -1,6 +1,6 @@
 # Privacy
 
-Tab Audio Recorder runs locally in Chrome.
+Dolphin Tab Audio Recorder runs locally in Chrome.
 
 - No servers.
 - No uploads.
@@ -10,4 +10,3 @@ Tab Audio Recorder runs locally in Chrome.
 - No microphone capture.
 
 The extension captures audio from the active tab only after the user clicks Start Recording. Audio is encoded locally and downloaded through Chrome's download manager.
-

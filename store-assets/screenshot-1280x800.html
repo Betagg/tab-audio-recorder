@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tab Audio Recorder Store Screenshot</title>
+    <title>Dolphin Tab Audio Recorder Store Screenshot</title>
     <style>
       * {
         box-sizing: border-box;
@@ -117,9 +117,16 @@
       .popup-title {
         display: flex;
         align-items: center;
+        min-width: 0;
         gap: 12px;
         font-size: 17px;
         font-weight: 800;
+      }
+
+      .popup-title span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .popup-title img {
@@ -214,7 +221,7 @@
     <main class="canvas">
       <header class="brand">
         <img src="../extension/assets/icon.svg" alt="">
-        <h1>Tab Audio Recorder</h1>
+        <h1>Dolphin Tab Audio Recorder</h1>
       </header>
 
       <section class="content">
@@ -234,7 +241,7 @@
           <div class="popup-header">
             <div class="popup-title">
               <img src="../extension/assets/icon.svg" alt="">
-              <span>Tab Audio Recorder</span>
+              <span>Dolphin Tab Audio Recorder</span>
             </div>
             <div class="badge">REC</div>
           </div>

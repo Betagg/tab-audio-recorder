@@ -2,7 +2,7 @@
 
 ## Product Name
 
-Tab Audio Recorder
+Dolphin Tab Audio Recorder
 
 ## Short Description
 
@@ -10,7 +10,7 @@ Record audio from the current browser tab and save it locally as an MP3.
 
 ## Detailed Description
 
-Tab Audio Recorder is the fastest way to save audio from a browser tab.
+Dolphin Tab Audio Recorder is the fastest way to save audio from a browser tab.
 
 Record podcasts, lessons, webinars, meetings, videos, and other tab audio without recording your screen. The extension captures audio from the active tab only after you start recording, keeps playback audible, and saves the result as a local MP3 file.
 
@@ -40,7 +40,7 @@ English
 
 ## Website Content / Permission Justification
 
-Tab Audio Recorder uses tab capture to record audio from the active browser tab after the user starts recording. It uses activeTab and scripting only after user action to read lightweight metadata from the active tab, such as title and URL, for MP3 filename suggestions and local recording history. Audio and metadata stay on the user's device.
+Dolphin Tab Audio Recorder uses tab capture to record audio from the active browser tab after the user starts recording. It uses activeTab and scripting only after user action to read lightweight metadata from the active tab, such as title and URL, for MP3 filename suggestions and local recording history. Audio and metadata stay on the user's device.
 
 Permission justifications:
 

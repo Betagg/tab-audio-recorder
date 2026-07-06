@@ -2,11 +2,11 @@
 
 Last updated: 2026-06-18
 
-Tab Audio Recorder is a Chrome extension that records audio from the active browser tab and saves it locally as an MP3 file.
+Dolphin Tab Audio Recorder is a Chrome extension that records audio from the active browser tab and saves it locally as an MP3 file.
 
 ## Data Processing
 
-Tab Audio Recorder runs locally in Chrome. It does not upload recordings or metadata to any server.
+Dolphin Tab Audio Recorder runs locally in Chrome. It does not upload recordings or metadata to any server.
 
 The extension may process the following information locally:
 
@@ -21,19 +21,19 @@ Recording history is stored locally in the browser's extension storage. History 
 
 ## Data Sharing
 
-Tab Audio Recorder does not sell, transfer, share, or upload user data.
+Dolphin Tab Audio Recorder does not sell, transfer, share, or upload user data.
 
 ## Analytics and Tracking
 
-Tab Audio Recorder does not use analytics, advertising trackers, or behavioral tracking.
+Dolphin Tab Audio Recorder does not use analytics, advertising trackers, or behavioral tracking.
 
 ## Accounts
 
-Tab Audio Recorder does not require an account.
+Dolphin Tab Audio Recorder does not require an account.
 
 ## Microphone
 
-Tab Audio Recorder does not capture microphone audio. It captures audio from the active browser tab only after the user starts recording.
+Dolphin Tab Audio Recorder does not capture microphone audio. It captures audio from the active browser tab only after the user starts recording.
 
 ## Contact
 

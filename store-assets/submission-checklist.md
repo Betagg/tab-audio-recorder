@@ -4,7 +4,7 @@
 
 Use this ZIP file:
 
-`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.6-20260627-171717.zip`
+`/Users/shenjiwei/Documents/Tap record/dist/tab-audio-recorder-v0.1.7-20260707-000413.zip`
 
 The ZIP has `manifest.json` at the archive root and excludes `.DS_Store`.
 
@@ -26,7 +26,7 @@ Optional:
 2. Click Add new item.
 3. Upload the ZIP package.
 4. Fill Store Listing:
-   - Product name: Tab Audio Recorder
+   - Product name: Dolphin Tab Audio Recorder
    - Category: Productivity
    - Language: English
    - Detailed description: copy from `listing-copy.md`

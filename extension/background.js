@@ -195,16 +195,16 @@ async function updateActionIndicator(state = cachedState) {
   const status = state.status || "ready";
   let text = "";
   let color = "#5A9DEE";
-  let title = "Tab Audio Recorder";
+  let title = "Dolphin Tab Audio Recorder";
 
   if (status === "recording") {
     text = "REC";
     color = "#E5343F";
-    title = "Tab Audio Recorder - Recording";
+    title = "Dolphin Tab Audio Recorder - Recording";
   } else if (status === "paused") {
     text = "PAU";
     color = "#F5A524";
-    title = "Tab Audio Recorder - Paused";
+    title = "Dolphin Tab Audio Recorder - Paused";
   }
 
   try {
