@@ -12,6 +12,8 @@ The ZIP has `manifest.json` at the archive root and excludes `.DS_Store`.
 
 - Store icon: `/Users/shenjiwei/Documents/Tap record/extension/assets/icon-128.png`
 - Screenshot: `/Users/shenjiwei/Documents/Tap record/store-assets/screenshot-1280x800.png`
+- Recording screenshot: `/Users/shenjiwei/Documents/Tap record/store-assets/dolphin-tab-audio-recording-1280x800.png`
+- Trim screenshot: `/Users/shenjiwei/Documents/Tap record/store-assets/dolphin-tab-audio-trim-1280x800.png`
 - Small promo tile: `/Users/shenjiwei/Documents/Tap record/store-assets/small-promo-440x280.png`
 
 Optional:
