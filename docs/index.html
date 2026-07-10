@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dolphin Tab Audio Recorder - Record Chrome Tab Audio as MP3</title>
+    <meta name="description" content="Record audio from any Chrome tab with Dolphin. Save browser audio locally as MP3 with no uploads, no account, and no screen recorder.">
+    <link rel="canonical" href="https://betagg.github.io/tab-audio-recorder/">
+    <link rel="alternate" hreflang="en" href="https://betagg.github.io/tab-audio-recorder/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://betagg.github.io/tab-audio-recorder/zh/">
+    <link rel="alternate" hreflang="x-default" href="https://betagg.github.io/tab-audio-recorder/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dolphin Tab Audio Recorder - Record Chrome Tab Audio as MP3">
+    <meta property="og:description" content="Record audio from any Chrome tab with Dolphin. Save browser audio locally as MP3 with no uploads, no account, and no screen recorder.">
+    <meta property="og:url" content="https://betagg.github.io/tab-audio-recorder/">
+    <meta property="og:image" content="https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dolphin Tab Audio Recorder - Record Chrome Tab Audio as MP3">
+    <meta name="twitter:description" content="Record audio from any Chrome tab with Dolphin. Save browser audio locally as MP3 with no uploads, no account, and no screen recorder.">
+    <meta name="twitter:image" content="https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png">
+    <link rel="icon" href="assets/dolphin-logo-128.png">
+    <link rel="stylesheet" href="assets/site.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Dolphin Tab Audio Recorder","applicationCategory":"BrowserApplication","operatingSystem":"Chrome","browserRequirements":"Chrome browser with extension support","description":"Record audio from any Chrome tab with Dolphin. Save browser audio locally as MP3 with no uploads, no account, and no screen recorder.","image":"https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I record audio from a Chrome tab?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dolphin captures audio playing in the active Chrome tab after you start recording."}},{"@type":"Question","name":"Is Dolphin an audio recorder for Chrome?","acceptedAnswer":{"@type":"Answer","text":"Yes. Dolphin is a focused Chrome audio recorder for saving current-tab audio as a local MP3 file."}},{"@type":"Question","name":"Does Dolphin record my screen?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin is not a screen recorder. It records tab audio only and does not create video files."}},{"@type":"Question","name":"Does Dolphin upload my audio?","acceptedAnswer":{"@type":"Answer","text":"No. Recordings are processed locally in Chrome and downloaded to your device."}},{"@type":"Question","name":"What format does Dolphin export?","acceptedAnswer":{"@type":"Answer","text":"Dolphin currently exports MP3 files. WAV is a useful editing format, but it is not part of the current extension release."}},{"@type":"Question","name":"Does it record microphone or system audio?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin records audio from the active browser tab. It does not capture your microphone or full system audio."}},{"@type":"Question","name":"Can Dolphin record protected or DRM-based streams?","acceptedAnswer":{"@type":"Answer","text":"Dolphin is designed for audio you have the right to capture. Some protected or DRM-based content may not be recordable."}},{"@type":"Question","name":"Is Dolphin free to use?","acceptedAnswer":{"@type":"Answer","text":"Dolphin includes a free monthly recording allowance. Extra access can be unlocked with an invite code or lifetime access when available."}}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Dolphin Tab Audio Recorder home">
+        <img src="assets/dolphin-logo-128.png" alt="" width="40" height="40">
+        <span>Dolphin Tab Audio Recorder</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation"><a href="./" aria-current="page">Chrome Audio Recorder</a><a href="tab-audio-recorder/">Tab Audio Recorder</a><a href="record-audio-from-website/">Record Website Audio</a><a href="zh/">中文</a><a href="privacy/">Privacy</a><a href="support/">Support</a></nav>
+      <a class="nav-cta" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=header">Add to Chrome</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">Tab audio recorder</p>
+          <h1>Record Chrome Tab Audio</h1>
+          <p class="hero-subcopy">Save browser audio as a local MP3. No screen recording, uploads, or setup.</p>
+          <div class="hero-actions">
+            <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=hero">Add to Chrome</a>
+          </div>
+          <ul class="trust-list"><li>Current tab audio</li><li>Local MP3</li><li>No uploads</li></ul>
+          <p class="privacy-note">Local recording. No uploads.</p>
+        </div>
+        <figure class="hero-media">
+        <img src="assets/dolphin-recording-1280x800.png" alt="Dolphin Chrome audio recorder popup recording current tab audio" width="1280" height="800">
+      </figure>
+      </section>
+
+      <section class="section" id="how-it-works">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>Open a tab, start recording, export MP3</h2>
+      
+      
+    </div>
+    <ol class="steps"><li>
+        <span>Open the Chrome tab</span>
+        <p>Play the lecture, webinar, podcast, web player, or website audio you want to keep.</p>
+      </li><li>
+        <span>Start Dolphin</span>
+        <p>Click the extension and record audio from the active tab while you listen normally.</p>
+      </li><li>
+        <span>Save the useful part</span>
+        <p>Stop recording, trim the segment if needed, and download a local MP3 file.</p>
+      </li></ol>
+    
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Why not screen recording</p>
+      <h2>Audio-only recording keeps the file and workflow lighter</h2>
+      <p>Screen recorders are useful when you need video. But if the task is only to save Chrome tab audio, they add extra steps: record video, export a large file, convert it to audio, then rename it.</p><p>Dolphin focuses on the smaller job: record Chrome audio from one tab and save it as a clean local audio file.</p>
+      
+    </div>
+    
+    
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Use cases</p>
+      <h2>Built around the task: useful browser audio you want to save</h2>
+      
+      
+    </div>
+    
+    <div class="card-grid"><article class="card">
+        <h3>Lectures and online courses</h3>
+        <p>Save spoken lessons, language material, and learning clips for later review.</p>
+      </article><article class="card">
+        <h3>Podcasts and interviews</h3>
+        <p>Capture reference audio from browser players when you have permission to save it.</p>
+      </article><article class="card">
+        <h3>QA and developer capture</h3>
+        <p>Record website audio behavior for testing, documentation, and reproducible reports.</p>
+      </article><article class="card">
+        <h3>Web-player audio</h3>
+        <p>Keep useful temporary browser audio without setting up desktop recording software.</p>
+      </article></div>
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Format</p>
+      <h2>MP3 export today, with clear expectations</h2>
+      
+      
+    </div>
+    
+    
+    <div class="format-grid">
+    <article>
+      <h3>MP3</h3>
+      <p>Best for smaller files, sharing, offline listening, lecture review, and everyday browser audio capture.</p>
+      <strong>Current Dolphin export format</strong>
+    </article>
+    <article>
+      <h3>WAV</h3>
+      <p>Best for editing workflows and uncompressed audio, but larger and not included in the current release.</p>
+      <strong>Not available yet</strong>
+    </article>
+  </div>
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Editing</p>
+      <h2>Trim the useful part before downloading</h2>
+      <p>After recording, Dolphin shows a waveform so you can keep the part that matters and skip the extra silence at the beginning or end.</p><p>Move the trim handles, preview from the new start point, then save the final MP3. It is meant for quick cleanup, not heavy audio production.</p>
+      
+    </div>
+    
+    
+    
+    <div class="feature-split">
+    <figure>
+      <img src="assets/dolphin-trim-1280x800.png" alt="Dolphin waveform trim editor for choosing the useful audio segment" width="1280" height="800">
+    </figure>
+    <div class="mini-feature-grid">
+      <article>
+            <h3>Waveform view</h3>
+            <p>Use the visible audio shape to find the right cut point.</p>
+          </article><article>
+            <h3>Preview after trim</h3>
+            <p>Adjust the segment and hear the kept section before saving.</p>
+          </article><article>
+            <h3>No separate editor</h3>
+            <p>Avoid downloading a long file just to cut it somewhere else.</p>
+          </article>
+    </div>
+  </div>
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Shortcuts</p>
+      <h2>Start and stop recording faster</h2>
+      <p>Use Chrome extension shortcuts when timing matters. Press the shortcut once to start recording the active tab, then press it again to stop.</p><p>You can review or change extension shortcuts from Chrome's shortcut settings.</p>
+      
+    </div>
+    
+    
+    
+    
+    <div class="shortcut-panel">
+    <div>
+      <span>Recommended setup</span>
+      <strong>Chrome extension shortcut</strong>
+      <p>Open chrome://extensions/shortcuts, find Dolphin, then assign a shortcut for starting and stopping recording.</p>
+    </div>
+    <div class="shortcut-keys" aria-label="Shortcut example">
+      <kbd>Mac</kbd>
+      <span>Command + Shift + Y</span>
+      <kbd>Windows</kbd>
+      <span>Ctrl + Shift + Y</span>
+    </div>
+  </div>
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Pricing</p>
+      <h2>Free monthly use, then unlock when Dolphin becomes useful</h2>
+      <p>Dolphin includes 5 free recordings each month. If you need more, unlock the current device with an invite code or choose lifetime access.</p>
+      
+    </div>
+    
+    
+    
+    
+    
+    <div class="pricing-panel">
+    <article class="price-card">
+      <p>Free allowance</p>
+      <h3>5 recordings per month</h3>
+      <span>Good for occasional lectures, podcasts, and website audio.</span>
+    </article>
+    <article class="price-card featured">
+      <p>Early-bird lifetime</p>
+      <h3><s>$29.90</s> $9.99</h3>
+      <span>Lifetime access on this device. Standard price is $29.90 later.</span>
+    </article>
+    <article class="price-card">
+      <p>Invite code</p>
+      <h3>Permanent unlock</h3>
+      <span>After activation, this device stays unlocked.</span>
+    </article>
+  </div>
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">History</p>
+      <h2>Find the source page again after saving</h2>
+      <p>Dolphin keeps a local recording history with the page title, source URL, duration, filename, and save time. It helps you return to the original lecture, webinar, interview, or web player later.</p>
+      
+    </div>
+    
+    <div class="card-grid"><article class="card">
+        <h3>Source URL</h3>
+        <p>Keep the page link beside the recording so the context does not disappear.</p>
+      </article><article class="card">
+        <h3>Page title</h3>
+        <p>Use the original page title as a practical memory cue.</p>
+      </article><article class="card">
+        <h3>Local history</h3>
+        <p>History metadata stays on your device and is not uploaded by the extension.</p>
+      </article><article class="card">
+        <h3>Faster follow-up</h3>
+        <p>Revisit the source page when you need notes, citations, or the next lesson.</p>
+      </article></div>
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Privacy</p>
+      <h2>Local recording, no audio uploads</h2>
+      <p>Dolphin records and encodes tab audio locally in Chrome. Your recordings are downloaded to your device and are not uploaded by the extension.</p><p>The extension uses Chrome permissions for the active tab, tab audio capture, downloads, and an offscreen recording document. It does not capture your microphone.</p>
+      <a class="text-link" data-track="privacy_link_click" href="privacy/">Read about local recording and privacy</a>
+    </div>
+    
+    
+    
+    
+    
+    
+  </section>
+
+      <section class="section bottom-cta">
+        <div>
+          <p class="eyebrow">Ready to record Chrome tab audio?</p>
+          <h2>Install Dolphin and save useful browser audio as a local MP3.</h2>
+        </div>
+        <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=bottom">Add to Chrome</a>
+      </section>
+
+      <section class="section faq-section">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <details data-track="support_question_click">
+            <summary>Can I record audio from a Chrome tab?</summary>
+            <p>Yes. Dolphin captures audio playing in the active Chrome tab after you start recording.</p>
+          </details><details data-track="support_question_click">
+            <summary>Is Dolphin an audio recorder for Chrome?</summary>
+            <p>Yes. Dolphin is a focused Chrome audio recorder for saving current-tab audio as a local MP3 file.</p>
+          </details><details data-track="support_question_click">
+            <summary>Does Dolphin record my screen?</summary>
+            <p>No. Dolphin is not a screen recorder. It records tab audio only and does not create video files.</p>
+          </details><details data-track="support_question_click">
+            <summary>Does Dolphin upload my audio?</summary>
+            <p>No. Recordings are processed locally in Chrome and downloaded to your device.</p>
+          </details><details data-track="support_question_click">
+            <summary>What format does Dolphin export?</summary>
+            <p>Dolphin currently exports MP3 files. WAV is a useful editing format, but it is not part of the current extension release.</p>
+          </details><details data-track="support_question_click">
+            <summary>Does it record microphone or system audio?</summary>
+            <p>No. Dolphin records audio from the active browser tab. It does not capture your microphone or full system audio.</p>
+          </details><details data-track="support_question_click">
+            <summary>Can Dolphin record protected or DRM-based streams?</summary>
+            <p>Dolphin is designed for audio you have the right to capture. Some protected or DRM-based content may not be recordable.</p>
+          </details><details data-track="support_question_click">
+            <summary>Is Dolphin free to use?</summary>
+            <p>Dolphin includes a free monthly recording allowance. Extra access can be unlocked with an invite code or lifetime access when available.</p>
+          </details>
+    </div>
+  </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="./">
+          <img src="assets/dolphin-logo-128.png" alt="" width="32" height="32">
+          <span>Dolphin Tab Audio Recorder</span>
+        </a>
+        <p>Record Chrome tab audio locally. No screen recorder, no uploads, no audio routing.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="./">Chrome Audio Recorder</a><a href="tab-audio-recorder/">Tab Audio Recorder</a><a href="record-audio-from-website/">Record Website Audio</a><a href="zh/">中文</a><a href="privacy/">Privacy</a><a href="support/">Support</a>
+      </nav>
+    </footer>
+
+    <script>
+      (function () {
+        function track(name, detail) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: name, detail: detail || {} });
+          window.dispatchEvent(new CustomEvent("dolphin_site_event", {
+            detail: { event: name, data: detail || {} }
+          }));
+        }
+
+        document.addEventListener("click", function (event) {
+          var target = event.target.closest("[data-track]");
+          if (!target) return;
+          var eventName = target.getAttribute("data-track");
+          track(eventName, {
+            text: target.textContent.trim(),
+            href: target.getAttribute("href") || "",
+            path: window.location.pathname
+          });
+          if (target.hostname && target.hostname !== window.location.hostname) {
+            track("outbound_chrome_webstore_click", {
+              href: target.href,
+              path: window.location.pathname
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

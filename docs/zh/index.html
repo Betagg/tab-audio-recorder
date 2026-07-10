@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dolphin Tab Audio Recorder - 录制 Chrome 标签页音频并保存为 MP3</title>
+    <meta name="description" content="Dolphin 可以录制当前 Chrome 标签页的声音，并在本地保存为 MP3。无需录屏、无需上传、无需账号。">
+    <link rel="canonical" href="https://betagg.github.io/tab-audio-recorder/zh/">
+    <link rel="alternate" hreflang="en" href="https://betagg.github.io/tab-audio-recorder/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://betagg.github.io/tab-audio-recorder/zh/">
+    <link rel="alternate" hreflang="x-default" href="https://betagg.github.io/tab-audio-recorder/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dolphin Tab Audio Recorder - 录制 Chrome 标签页音频并保存为 MP3">
+    <meta property="og:description" content="Dolphin 可以录制当前 Chrome 标签页的声音，并在本地保存为 MP3。无需录屏、无需上传、无需账号。">
+    <meta property="og:url" content="https://betagg.github.io/tab-audio-recorder/zh/">
+    <meta property="og:image" content="https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dolphin Tab Audio Recorder - 录制 Chrome 标签页音频并保存为 MP3">
+    <meta name="twitter:description" content="Dolphin 可以录制当前 Chrome 标签页的声音，并在本地保存为 MP3。无需录屏、无需上传、无需账号。">
+    <meta name="twitter:image" content="https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png">
+    <link rel="icon" href="../assets/dolphin-logo-128.png">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Dolphin Tab Audio Recorder","applicationCategory":"BrowserApplication","operatingSystem":"Chrome","browserRequirements":"Chrome browser with extension support","description":"Dolphin 可以录制当前 Chrome 标签页的声音，并在本地保存为 MP3。无需录屏、无需上传、无需账号。","image":"https://betagg.github.io/tab-audio-recorder/assets/dolphin-recording-1280x800.png","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Dolphin 会录屏吗？","acceptedAnswer":{"@type":"Answer","text":"不会。Dolphin 只录制当前 Chrome 标签页的声音，不生成视频文件。"}},{"@type":"Question","name":"录音会上传到服务器吗？","acceptedAnswer":{"@type":"Answer","text":"不会。录音和 MP3 编码在本地完成，文件保存到你的设备。"}},{"@type":"Question","name":"可以录麦克风或整个电脑声音吗？","acceptedAnswer":{"@type":"Answer","text":"不可以。Dolphin 专注于当前浏览器标签页音频。"}},{"@type":"Question","name":"可以录所有网站吗？","acceptedAnswer":{"@type":"Answer","text":"大多数能正常播放标签页声音的网站都可以尝试录制，但受保护或 DRM 内容可能无法录制。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://betagg.github.io/tab-audio-recorder/"},{"@type":"ListItem","position":2,"name":"录制 Chrome 标签页里的声音","item":"https://betagg.github.io/tab-audio-recorder/zh/"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="Dolphin Tab Audio Recorder home">
+        <img src="../assets/dolphin-logo-128.png" alt="" width="40" height="40">
+        <span>Dolphin Tab Audio Recorder</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航"><a href="../">英文首页</a><a href="../tab-audio-recorder/">标签页录音</a><a href="../record-audio-from-website/">网页音频录制</a><a href="../zh/" aria-current="page">中文</a><a href="../privacy/">隐私</a><a href="../support/">支持</a></nav>
+      <a class="nav-cta" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=header">安装 Chrome 插件</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">Chrome 标签页录音工具</p>
+          <h1>录制 Chrome 标签页里的声音</h1>
+          <p class="hero-subcopy">当你只想保存网页里的音频时，Dolphin 可以直接录制当前标签页声音，剪掉不需要的片段，然后下载本地 MP3。</p>
+          <div class="hero-actions">
+            <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=hero">安装 Chrome 插件</a>
+          </div>
+          <ul class="trust-list"><li>当前标签页录音</li><li>本地保存 MP3</li><li>不录屏、不上传</li></ul>
+          <p class="privacy-note">本地录音，不上传。</p>
+        </div>
+        <figure class="hero-media">
+        <img src="../assets/dolphin-recording-1280x800.png" alt="Dolphin Chrome 标签页录音插件正在录制当前标签页声音" width="1280" height="800">
+      </figure>
+      </section>
+
+      <section class="section" id="how-it-works">
+    <div class="section-head">
+      <p class="eyebrow">使用流程</p>
+      <h2>打开网页，开始录制，保存 MP3</h2>
+      
+      
+    </div>
+    <ol class="steps"><li>
+        <span>打开有声音的标签页</span>
+        <p>播放课程、播客、访谈、网页播放器或其他你有权保存的音频。</p>
+      </li><li>
+        <span>点击 Dolphin 开始录制</span>
+        <p>插件只捕捉当前标签页的声音，你可以正常继续收听。</p>
+      </li><li>
+        <span>剪辑并保存</span>
+        <p>录完后通过音波选择要保留的片段，再下载为 MP3。</p>
+      </li></ol>
+    
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">适合场景</p>
+      <h2>适合学习、研究和网页音频保存</h2>
+      
+      
+    </div>
+    
+    <div class="card-grid"><article class="card">
+        <h3>在线课程</h3>
+        <p>保存 lecture、语言学习材料、课程回放中的重点音频。</p>
+      </article><article class="card">
+        <h3>研究素材</h3>
+        <p>留存访谈、webinar、专家讨论和网页播放器里的参考音频。</p>
+      </article><article class="card">
+        <h3>内容创作</h3>
+        <p>收集播客片段、参考音频和网页声音素材，便于后续整理。</p>
+      </article><article class="card">
+        <h3>问题复现</h3>
+        <p>记录网页音频问题，方便 QA、产品和开发沟通。</p>
+      </article></div>
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">剪辑</p>
+      <h2>保存前先选出真正需要的那一段</h2>
+      <p>录制完成后，Dolphin 会显示音波。你可以拖动两端的选择范围，预览保留片段，再保存最终 MP3。</p>
+      
+    </div>
+    
+    
+    
+    <div class="feature-split">
+    <figure>
+      <img src="../assets/dolphin-trim-1280x800.png" alt="Dolphin 音波剪辑界面" width="1280" height="800">
+    </figure>
+    <div class="mini-feature-grid">
+      <article>
+            <h3>音波判断</h3>
+            <p>通过波形更容易判断从哪里开始剪。</p>
+          </article><article>
+            <h3>调整后预览</h3>
+            <p>拖动范围后直接从新的开头预览。</p>
+          </article><article>
+            <h3>减少二次剪辑</h3>
+            <p>不用先下载长文件再打开其他软件处理。</p>
+          </article>
+    </div>
+  </div>
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">快捷键</p>
+      <h2>用快捷键更快开始和停止</h2>
+      <p>你可以在 Chrome 扩展快捷键设置里为 Dolphin 绑定快捷键。按一次开始录制，再按一次停止。</p>
+      
+    </div>
+    
+    
+    
+    
+    <div class="shortcut-panel">
+    <div>
+      <span>推荐设置</span>
+      <strong>Chrome 扩展快捷键</strong>
+      <p>在地址栏打开 chrome://extensions/shortcuts，找到 Dolphin，然后设置“开始/停止录制”的快捷键。</p>
+    </div>
+    <div class="shortcut-keys" aria-label="快捷键示例">
+      <kbd>Mac</kbd>
+      <span>Command + Shift + Y</span>
+      <kbd>Windows</kbd>
+      <span>Ctrl + Shift + Y</span>
+    </div>
+  </div>
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">价格</p>
+      <h2>每月 5 次免费，觉得有用再解锁</h2>
+      <p>Dolphin 每月提供 5 次免费录制。额度用完后，可以输入邀请码解锁当前设备，或选择买断终身使用。</p>
+      
+    </div>
+    
+    
+    
+    
+    
+    <div class="pricing-panel">
+    <article class="price-card">
+      <p>免费额度</p>
+      <h3>每月 5 次录制</h3>
+      <span>适合偶尔保存课程、播客和网页音频。</span>
+    </article>
+    <article class="price-card featured">
+      <p>早鸟买断</p>
+      <h3><s>$29.90</s> $9.99</h3>
+      <span>当前设备终身使用。后续标准价为 $29.90。</span>
+    </article>
+    <article class="price-card">
+      <p>邀请码</p>
+      <h3>验证后永久免费</h3>
+      <span>邀请码验证成功后，这台设备可持续使用。</span>
+    </article>
+  </div>
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">历史记录</p>
+      <h2>录完以后也能找回来源网页</h2>
+      <p>Dolphin 会在本地保存录音历史，包括网页标题、来源 URL、时长、文件名和保存时间。之后想回看课程、webinar、访谈或网页播放器时会更方便。</p>
+      
+    </div>
+    
+    <div class="card-grid"><article class="card">
+        <h3>来源链接</h3>
+        <p>每条录音都能看到当时录制的网址。</p>
+      </article><article class="card">
+        <h3>网页标题</h3>
+        <p>用原始标题帮助你快速判断录音内容。</p>
+      </article><article class="card">
+        <h3>本地保存</h3>
+        <p>历史记录只保存在设备上，不上传录音文件。</p>
+      </article><article class="card">
+        <h3>方便回溯</h3>
+        <p>需要补笔记、找出处或继续学习时更容易返回原页面。</p>
+      </article></div>
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">隐私</p>
+      <h2>录音在本地处理，不上传音频</h2>
+      <p>Dolphin 在 Chrome 本地录制和编码音频，并通过浏览器下载到你的设备。插件不会上传你的录音文件。</p>
+      <a class="text-link" data-track="privacy_link_click" href="../privacy/">查看隐私说明</a>
+    </div>
+    
+    
+    
+    
+    
+    
+  </section>
+
+      <section class="section bottom-cta">
+        <div>
+          <p class="eyebrow">准备开始录制标签页音频？</p>
+          <h2>安装 Dolphin，把有用的网页声音保存为本地 MP3。</h2>
+        </div>
+        <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=bottom">安装 Chrome 插件</a>
+      </section>
+
+      <section class="section faq-section">
+    <div class="section-head">
+      <p class="eyebrow">常见问题</p>
+      <h2>你可能会关心的问题</h2>
+    </div>
+    <div class="faq-list">
+      <details data-track="support_question_click">
+            <summary>Dolphin 会录屏吗？</summary>
+            <p>不会。Dolphin 只录制当前 Chrome 标签页的声音，不生成视频文件。</p>
+          </details><details data-track="support_question_click">
+            <summary>录音会上传到服务器吗？</summary>
+            <p>不会。录音和 MP3 编码在本地完成，文件保存到你的设备。</p>
+          </details><details data-track="support_question_click">
+            <summary>可以录麦克风或整个电脑声音吗？</summary>
+            <p>不可以。Dolphin 专注于当前浏览器标签页音频。</p>
+          </details><details data-track="support_question_click">
+            <summary>可以录所有网站吗？</summary>
+            <p>大多数能正常播放标签页声音的网站都可以尝试录制，但受保护或 DRM 内容可能无法录制。</p>
+          </details>
+    </div>
+  </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="../">
+          <img src="../assets/dolphin-logo-128.png" alt="" width="32" height="32">
+          <span>Dolphin Tab Audio Recorder</span>
+        </a>
+        <p>本地录制 Chrome 标签页音频。不录屏、不上传、不需要复杂音频路由。</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../">英文首页</a><a href="../tab-audio-recorder/">标签页录音</a><a href="../record-audio-from-website/">网页音频录制</a><a href="../zh/">中文</a><a href="../privacy/">隐私</a><a href="../support/">支持</a>
+      </nav>
+    </footer>
+
+    <script>
+      (function () {
+        function track(name, detail) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: name, detail: detail || {} });
+          window.dispatchEvent(new CustomEvent("dolphin_site_event", {
+            detail: { event: name, data: detail || {} }
+          }));
+        }
+
+        document.addEventListener("click", function (event) {
+          var target = event.target.closest("[data-track]");
+          if (!target) return;
+          var eventName = target.getAttribute("data-track");
+          track(eventName, {
+            text: target.textContent.trim(),
+            href: target.getAttribute("href") || "",
+            path: window.location.pathname
+          });
+          if (target.hostname && target.hostname !== window.location.hostname) {
+            track("outbound_chrome_webstore_click", {
+              href: target.href,
+              path: window.location.pathname
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
