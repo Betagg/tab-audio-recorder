@@ -16,6 +16,7 @@ const requiredPages = [
 
 const requiredAssets = [
   "assets/site.css",
+  "assets/favicon-32.png",
   "assets/dolphin-logo-128.png",
   "assets/dolphin-recording-1280x800.png",
   "assets/dolphin-trim-1280x800.png",

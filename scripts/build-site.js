@@ -1031,7 +1031,7 @@ function renderPage(page) {
     <meta name="twitter:title" content="${esc(page.title)}">
     <meta name="twitter:description" content="${esc(page.description)}">
     <meta name="twitter:image" content="${assetUrl(image)}">
-    <link rel="icon" href="${localAsset("/assets/dolphin-logo-128.png", page.path)}">
+    <link rel="icon" type="image/png" sizes="32x32" href="${localAsset("/assets/favicon-32.png", page.path)}">
     <link rel="stylesheet" href="${localAsset("/assets/site.css", page.path)}">
     ${schemaItems(page)}
   </head>
