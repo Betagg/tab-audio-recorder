@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Save Browser Audio as MP3 - Record Chrome Tab Audio</title>
+    <meta name="description" content="Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.">
+    <link rel="canonical" href="https://dolphintab.xyz/save-browser-audio-as-mp3/">
+    <link rel="alternate" hreflang="en" href="https://dolphintab.xyz/save-browser-audio-as-mp3/">
+    <link rel="alternate" hreflang="zh-Hans" href="https://dolphintab.xyz/zh/">
+    <link rel="alternate" hreflang="x-default" href="https://dolphintab.xyz/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Save Browser Audio as MP3 - Record Chrome Tab Audio">
+    <meta property="og:description" content="Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.">
+    <meta property="og:url" content="https://dolphintab.xyz/save-browser-audio-as-mp3/">
+    <meta property="og:image" content="https://dolphintab.xyz/assets/dolphin-trim-1280x800.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Save Browser Audio as MP3 - Record Chrome Tab Audio">
+    <meta name="twitter:description" content="Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.">
+    <meta name="twitter:image" content="https://dolphintab.xyz/assets/dolphin-trim-1280x800.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+    <link rel="stylesheet" href="../assets/site.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Save Browser Audio as MP3","description":"Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.","image":"https://dolphintab.xyz/assets/dolphin-trim-1280x800.png","step":[{"@type":"HowToStep","name":"Open the audio in Chrome","text":"Play the website, lecture, webinar, podcast, or web player audio in a Chrome tab."},{"@type":"HowToStep","name":"Start a Dolphin recording","text":"Use Dolphin from the active tab so the recorder captures the browser audio source."},{"@type":"HowToStep","name":"Stop after the useful part","text":"Stop recording when the segment you need is finished."},{"@type":"HowToStep","name":"Trim the waveform","text":"Remove silence, intros, or extra audio before the final export."},{"@type":"HowToStep","name":"Download the MP3","text":"Save the finished file locally with a clear filename."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I save browser audio as MP3?","acceptedAnswer":{"@type":"Answer","text":"Open the audio in a Chrome tab, start Dolphin, stop when finished, trim the waveform, and download the final MP3 file."}},{"@type":"Question","name":"Does Dolphin export WAV files?","acceptedAnswer":{"@type":"Answer","text":"No. The current release focuses on MP3 export."}},{"@type":"Question","name":"Can I edit the browser audio before saving?","acceptedAnswer":{"@type":"Answer","text":"You can trim the start and end of the recording before downloading the MP3."}},{"@type":"Question","name":"Is the MP3 uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin processes recordings locally in Chrome and saves the MP3 to your device."}},{"@type":"Question","name":"Can I save audio from protected streams as MP3?","acceptedAnswer":{"@type":"Answer","text":"Some protected or DRM-based content may not be available to browser tab capture. Always record audio you have the right to capture."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dolphintab.xyz/"},{"@type":"ListItem","position":2,"name":"Save Browser Audio as MP3","item":"https://dolphintab.xyz/save-browser-audio-as-mp3/"}]}</script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../" aria-label="Dolphin Tab Audio Recorder home">
+        <img src="../assets/dolphin-logo-128.png" alt="" width="40" height="40">
+        <span>Dolphin Tab Audio Recorder</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation"><a href="../">Chrome Audio Recorder</a><a href="../tab-audio-recorder/">Tab Audio Recorder</a><a href="../record-audio-from-website/">Record Website Audio</a><a href="../record-browser-audio/">Browser Audio</a><a href="../record-internal-audio-chrome/">Internal Audio</a><a href="../save-browser-audio-as-mp3/" aria-current="page">Save MP3</a><a href="../zh/">中文</a><a href="../privacy/">Privacy</a><a href="../support/">Support</a></nav>
+      <a class="nav-cta" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=header">Add to Chrome</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">MP3 browser audio</p>
+          <h1>Save Browser Audio as MP3</h1>
+          <p class="hero-subcopy">Record the audio playing in a Chrome tab, trim away the extra parts, and save the result as a local MP3 file.</p>
+          <div class="hero-actions">
+            <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=hero">Add to Chrome</a>
+          </div>
+          <ul class="trust-list"><li>MP3 export</li><li>Waveform trim</li><li>Local download</li></ul>
+          <p class="privacy-note">Local recording. No uploads.</p>
+        </div>
+        <figure class="hero-media">
+        <img src="../assets/dolphin-trim-1280x800.png" alt="Saving browser audio as MP3 after trimming in Dolphin" width="1280" height="800">
+      </figure>
+      </section>
+
+      <section class="section" id="how-it-works">
+    <div class="section-head">
+      <p class="eyebrow">Steps</p>
+      <h2>How to save browser audio as MP3</h2>
+      
+      
+    </div>
+    <ol class="steps"><li>
+        <span>Open the audio in Chrome</span>
+        <p>Play the website, lecture, webinar, podcast, or web player audio in a Chrome tab.</p>
+      </li><li>
+        <span>Start a Dolphin recording</span>
+        <p>Use Dolphin from the active tab so the recorder captures the browser audio source.</p>
+      </li><li>
+        <span>Stop after the useful part</span>
+        <p>Stop recording when the segment you need is finished.</p>
+      </li><li>
+        <span>Trim the waveform</span>
+        <p>Remove silence, intros, or extra audio before the final export.</p>
+      </li><li>
+        <span>Download the MP3</span>
+        <p>Save the finished file locally with a clear filename.</p>
+      </li></ol>
+    
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Why MP3</p>
+      <h2>MP3 is practical for everyday browser audio</h2>
+      <p>MP3 files are smaller than uncompressed audio and work well for lectures, interviews, spoken notes, web-player clips, and reference audio.</p><p>Dolphin focuses on quick browser audio capture and local MP3 download instead of advanced audio production.</p>
+      
+    </div>
+    
+    
+    <div class="format-grid">
+    <article>
+      <h3>MP3</h3>
+      <p>Best for smaller files, sharing, offline listening, lecture review, and everyday browser audio capture.</p>
+      <strong>Current Dolphin export format</strong>
+    </article>
+    <article>
+      <h3>WAV</h3>
+      <p>Best for editing workflows and uncompressed audio, but larger and not included in the current release.</p>
+      <strong>Not available yet</strong>
+    </article>
+  </div>
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Before saving</p>
+      <h2>Trim the recording before you download</h2>
+      <p>Browser audio recordings often include a few seconds of setup, silence, or extra playback after the useful part ends.</p><p>Dolphin shows a waveform so you can keep the important section before downloading the MP3.</p>
+      
+    </div>
+    
+    
+    
+    <div class="feature-split">
+    <figure>
+      <img src="../assets/dolphin-trim-1280x800.png" alt="Dolphin trim editor before saving browser audio as MP3" width="1280" height="800">
+    </figure>
+    <div class="mini-feature-grid">
+      <article>
+            <h3>Find the useful part</h3>
+            <p>Use the waveform to see where the audio starts and ends.</p>
+          </article><article>
+            <h3>Preview the segment</h3>
+            <p>Check the kept part before saving the MP3.</p>
+          </article><article>
+            <h3>Avoid extra editing</h3>
+            <p>Download a cleaner file without opening another editor.</p>
+          </article>
+    </div>
+  </div>
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Privacy</p>
+      <h2>The MP3 is saved on your device</h2>
+      <p>Dolphin records and encodes browser audio locally in Chrome. The MP3 is downloaded to your device and is not uploaded by the extension.</p>
+      <a class="text-link" data-track="privacy_link_click" href="../privacy/">Read the privacy details</a>
+    </div>
+    
+    
+    
+    
+    
+    
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Related guide</p>
+      <h2>Need the full tab recording workflow?</h2>
+      <p>If you are still choosing the right source tab or troubleshooting silent recordings, start with the tab audio recorder guide.</p>
+      <a class="text-link" data-track="internal_link_click" href="../tab-audio-recorder/">Read the tab audio recorder guide</a>
+    </div>
+    
+    
+    
+    
+    
+    
+  </section>
+
+      <section class="section bottom-cta">
+        <div>
+          <p class="eyebrow">Ready to record Chrome tab audio?</p>
+          <h2>Install Dolphin and save useful browser audio as a local MP3.</h2>
+        </div>
+        <a class="button primary" data-track="cta_add_to_chrome_click" href="https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site&utm_content=bottom">Add to Chrome</a>
+      </section>
+
+      <section class="section faq-section">
+    <div class="section-head">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq-list">
+      <details data-track="support_question_click">
+            <summary>How do I save browser audio as MP3?</summary>
+            <p>Open the audio in a Chrome tab, start Dolphin, stop when finished, trim the waveform, and download the final MP3 file.</p>
+          </details><details data-track="support_question_click">
+            <summary>Does Dolphin export WAV files?</summary>
+            <p>No. The current release focuses on MP3 export.</p>
+          </details><details data-track="support_question_click">
+            <summary>Can I edit the browser audio before saving?</summary>
+            <p>You can trim the start and end of the recording before downloading the MP3.</p>
+          </details><details data-track="support_question_click">
+            <summary>Is the MP3 uploaded anywhere?</summary>
+            <p>No. Dolphin processes recordings locally in Chrome and saves the MP3 to your device.</p>
+          </details><details data-track="support_question_click">
+            <summary>Can I save audio from protected streams as MP3?</summary>
+            <p>Some protected or DRM-based content may not be available to browser tab capture. Always record audio you have the right to capture.</p>
+          </details>
+    </div>
+  </section>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="brand footer-brand" href="../">
+          <img src="../assets/dolphin-logo-128.png" alt="" width="32" height="32">
+          <span>Dolphin Tab Audio Recorder</span>
+        </a>
+        <p>Record Chrome tab audio locally. No screen recorder, no uploads, no audio routing.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="../">Chrome Audio Recorder</a><a href="../tab-audio-recorder/">Tab Audio Recorder</a><a href="../record-audio-from-website/">Record Website Audio</a><a href="../record-browser-audio/">Browser Audio</a><a href="../record-internal-audio-chrome/">Internal Audio</a><a href="../save-browser-audio-as-mp3/">Save MP3</a><a href="../zh/">中文</a><a href="../privacy/">Privacy</a><a href="../support/">Support</a>
+      </nav>
+    </footer>
+
+    <script>
+      (function () {
+        function track(name, detail) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: name, detail: detail || {} });
+          window.dispatchEvent(new CustomEvent("dolphin_site_event", {
+            detail: { event: name, data: detail || {} }
+          }));
+        }
+
+        document.addEventListener("click", function (event) {
+          var target = event.target.closest("[data-track]");
+          if (!target) return;
+          var eventName = target.getAttribute("data-track");
+          track(eventName, {
+            text: target.textContent.trim(),
+            href: target.getAttribute("href") || "",
+            path: window.location.pathname
+          });
+          if (target.hostname && target.hostname !== window.location.hostname) {
+            track("outbound_chrome_webstore_click", {
+              href: target.href,
+              path: window.location.pathname
+            });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

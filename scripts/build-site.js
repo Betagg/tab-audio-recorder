@@ -12,6 +12,9 @@ const firstLaunchPages = [
   "index.html",
   "tab-audio-recorder/index.html",
   "record-audio-from-website/index.html",
+  "record-browser-audio/index.html",
+  "record-internal-audio-chrome/index.html",
+  "save-browser-audio-as-mp3/index.html",
   "privacy/index.html",
   "support/index.html",
 ];
@@ -28,6 +31,9 @@ const navLinks = [
   ["/", "Chrome Audio Recorder"],
   ["/tab-audio-recorder/", "Tab Audio Recorder"],
   ["/record-audio-from-website/", "Record Website Audio"],
+  ["/record-browser-audio/", "Browser Audio"],
+  ["/record-internal-audio-chrome/", "Internal Audio"],
+  ["/save-browser-audio-as-mp3/", "Save MP3"],
   ["/zh/", "中文"],
   ["/privacy/", "Privacy"],
   ["/support/", "Support"],
@@ -37,6 +43,9 @@ const zhNavLabels = new Map([
   ["/", "英文首页"],
   ["/tab-audio-recorder/", "标签页录音"],
   ["/record-audio-from-website/", "网页音频录制"],
+  ["/record-browser-audio/", "浏览器音频"],
+  ["/record-internal-audio-chrome/", "Chrome 内部音频"],
+  ["/save-browser-audio-as-mp3/", "保存 MP3"],
   ["/zh/", "中文"],
   ["/privacy/", "隐私"],
   ["/support/", "支持"],
@@ -523,6 +532,350 @@ const pages = [
       {
         q: "Is my website audio uploaded?",
         a: "No. Recording and MP3 encoding run locally in Chrome.",
+      },
+    ],
+    schema: ["HowTo", "FAQPage", "BreadcrumbList"],
+  },
+  {
+    path: "record-browser-audio/index.html",
+    url: "/record-browser-audio/",
+    title: "Record Browser Audio in Chrome - Save Tab Sound as MP3",
+    description:
+      "Record browser audio from the active Chrome tab with Dolphin. Capture website, course, webinar, or podcast audio and save a local MP3.",
+    h1: "Record Browser Audio in Chrome",
+    kicker: "Browser audio recorder",
+    subcopy:
+      "Use Dolphin when the sound you need is playing inside Chrome and you want an audio file instead of a screen recording.",
+    image: "/assets/dolphin-recording-1280x800.png",
+    imageAlt: "Dolphin recording browser audio from the active Chrome tab",
+    trust: [
+      "Active browser tab",
+      "No screen recording",
+      "Local MP3 export",
+    ],
+    sections: [
+      {
+        id: "how-it-works",
+        label: "Workflow",
+        title: "How to record browser audio",
+        steps: [
+          [
+            "Open the browser audio source",
+            "Play the website, course, webinar, podcast, or web player in a Chrome tab.",
+          ],
+          [
+            "Start Dolphin on that tab",
+            "Click the extension while the audio tab is active so Dolphin captures the right source.",
+          ],
+          [
+            "Listen while recording",
+            "Keep the tab audible and avoid muting or reloading the source while the recording is running.",
+          ],
+          [
+            "Stop and trim",
+            "Stop when the useful part is done and trim silence or extra audio with the waveform editor.",
+          ],
+          [
+            "Download the MP3",
+            "Save the final recording locally through Chrome downloads.",
+          ],
+        ],
+      },
+      {
+        label: "Best fit",
+        title: "Browser audio sources Dolphin is built for",
+        cards: [
+          [
+            "Online courses",
+            "Capture spoken lessons and review clips from browser-based course players.",
+          ],
+          [
+            "Webinars and interviews",
+            "Save reference audio without recording your screen or desktop.",
+          ],
+          [
+            "Podcasts and web players",
+            "Record useful segments from browser players when you have permission to keep a copy.",
+          ],
+          [
+            "QA and product work",
+            "Record audio behavior from a website tab for bug reports and documentation.",
+          ],
+        ],
+      },
+      {
+        label: "Compared with desktop recording",
+        title: "Record the browser tab, not the whole computer",
+        body: [
+          "Traditional audio recording tools often need a virtual audio cable, system audio routing, or a separate editor. That can be overkill when the sound is already playing in one Chrome tab.",
+          "Dolphin keeps the capture focused on the browser tab and saves the result as a local MP3.",
+        ],
+      },
+      {
+        label: "Limits",
+        title: "What browser audio recording cannot guarantee",
+        body: [
+          "Dolphin records audio you have the right to capture from supported Chrome tabs. Some protected or DRM-based streams may block browser tab capture.",
+          "If the site reloads, changes players, or mutes the tab, stop and start a fresh recording from the active source.",
+        ],
+      },
+      {
+        label: "Related guide",
+        title: "Trying to save the audio file after recording?",
+        body: [
+          "If your main goal is a small local file for listening or notes, use the MP3 guide after learning the basic browser audio workflow.",
+        ],
+        link: ["/save-browser-audio-as-mp3/", "Read the browser audio to MP3 guide"],
+      },
+    ],
+    faq: [
+      {
+        q: "How can I record browser audio in Chrome?",
+        a: "Open the Chrome tab that plays the audio, start Dolphin from the toolbar, keep the tab audible, stop when finished, trim the recording, and download the MP3.",
+      },
+      {
+        q: "Does Dolphin record all browser tabs at once?",
+        a: "No. Dolphin focuses on the active Chrome tab after you start recording.",
+      },
+      {
+        q: "Is this the same as system audio recording?",
+        a: "No. Dolphin records audio from the active browser tab. It does not capture full system audio or microphone input.",
+      },
+      {
+        q: "Can I record protected browser audio?",
+        a: "Some protected or DRM-based audio may not be available to browser tab capture.",
+      },
+      {
+        q: "Where is the browser audio file saved?",
+        a: "Dolphin saves the finished MP3 locally through Chrome downloads.",
+      },
+    ],
+    schema: ["HowTo", "FAQPage", "BreadcrumbList"],
+  },
+  {
+    path: "record-internal-audio-chrome/index.html",
+    url: "/record-internal-audio-chrome/",
+    title: "Record Internal Audio in Chrome - Current Tab Audio Only",
+    description:
+      "Need to record internal audio in Chrome? Dolphin captures audio from the active tab and saves it locally as MP3 without microphone recording.",
+    h1: "Record Internal Audio in Chrome",
+    kicker: "Chrome internal audio",
+    subcopy:
+      "When people say internal audio in Chrome, they usually mean sound coming from a browser tab. Dolphin records that active-tab audio without using your microphone.",
+    image: "/assets/dolphin-trim-1280x800.png",
+    imageAlt: "Dolphin waveform editor after recording internal Chrome tab audio",
+    trust: [
+      "No microphone capture",
+      "Active tab audio",
+      "Trim before saving",
+    ],
+    sections: [
+      {
+        label: "Meaning",
+        title: "What internal audio means in Chrome",
+        body: [
+          "Internal audio usually means sound generated by an app or website, not sound from your microphone. In Chrome, the practical version is audio playing inside a tab.",
+          "Dolphin is designed for that case: record the active Chrome tab audio and download the useful segment as MP3.",
+        ],
+      },
+      {
+        id: "how-it-works",
+        label: "Steps",
+        title: "How to record internal audio from a Chrome tab",
+        steps: [
+          [
+            "Open the tab that plays audio",
+            "Use the Chrome tab with the course, webinar, podcast, interview, or web player.",
+          ],
+          [
+            "Check that the tab is not muted",
+            "Play the sound first so you know Chrome is sending audible tab audio.",
+          ],
+          [
+            "Start recording with Dolphin",
+            "Click Dolphin while that tab is active and start the current-tab recording.",
+          ],
+          [
+            "Stop at the right moment",
+            "Stop when the internal tab audio you need has finished.",
+          ],
+          [
+            "Trim and save MP3",
+            "Use the waveform editor to keep the important segment and download the file.",
+          ],
+        ],
+      },
+      {
+        label: "Not microphone audio",
+        title: "Dolphin does not use your microphone",
+        body: [
+          "Some tutorials record computer audio by playing sound through speakers and capturing it with a microphone. That can add room noise, echo, and lower quality.",
+          "Dolphin records tab audio directly through Chrome's browser capture flow. It does not capture your microphone or room sound.",
+        ],
+      },
+      {
+        label: "Common mistakes",
+        title: "Why internal Chrome audio recordings are silent",
+        cards: [
+          [
+            "Wrong active tab",
+            "Start Dolphin from the tab that is actually playing the sound.",
+          ],
+          [
+            "Muted browser tab",
+            "If the tab is muted, the recording may be silent.",
+          ],
+          [
+            "Player reload",
+            "If the web player reloads or changes source, start a new recording.",
+          ],
+          [
+            "Protected stream",
+            "Protected or DRM-based content may block browser tab capture.",
+          ],
+        ],
+      },
+      {
+        label: "Related guide",
+        title: "Want the broader browser audio workflow?",
+        body: [
+          "If the phrase internal audio is not important and you simply need to record sound from a browser tab, the browser audio guide covers the general workflow.",
+        ],
+        link: ["/record-browser-audio/", "Read the browser audio recorder guide"],
+      },
+    ],
+    faq: [
+      {
+        q: "Can Chrome record internal audio?",
+        a: "With a tab audio recorder like Dolphin, you can record audio playing from the active Chrome tab and save it locally.",
+      },
+      {
+        q: "Does Dolphin record microphone audio?",
+        a: "No. Dolphin records the active Chrome tab audio only and does not capture your microphone.",
+      },
+      {
+        q: "Is internal audio the same as system audio?",
+        a: "Not exactly. Dolphin is not a full system audio recorder. It captures audio from the active browser tab.",
+      },
+      {
+        q: "Can I record internal audio as MP3?",
+        a: "Yes. Dolphin saves current-tab recordings as local MP3 files.",
+      },
+      {
+        q: "Why did my internal audio recording have no sound?",
+        a: "The tab may have been muted, the wrong tab may have been active, or the source may be protected or reloaded during recording.",
+      },
+    ],
+    schema: ["HowTo", "FAQPage", "BreadcrumbList"],
+  },
+  {
+    path: "save-browser-audio-as-mp3/index.html",
+    url: "/save-browser-audio-as-mp3/",
+    title: "Save Browser Audio as MP3 - Record Chrome Tab Audio",
+    description:
+      "Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.",
+    h1: "Save Browser Audio as MP3",
+    kicker: "MP3 browser audio",
+    subcopy:
+      "Record the audio playing in a Chrome tab, trim away the extra parts, and save the result as a local MP3 file.",
+    image: "/assets/dolphin-trim-1280x800.png",
+    imageAlt: "Saving browser audio as MP3 after trimming in Dolphin",
+    trust: [
+      "MP3 export",
+      "Waveform trim",
+      "Local download",
+    ],
+    sections: [
+      {
+        id: "how-it-works",
+        label: "Steps",
+        title: "How to save browser audio as MP3",
+        steps: [
+          [
+            "Open the audio in Chrome",
+            "Play the website, lecture, webinar, podcast, or web player audio in a Chrome tab.",
+          ],
+          [
+            "Start a Dolphin recording",
+            "Use Dolphin from the active tab so the recorder captures the browser audio source.",
+          ],
+          [
+            "Stop after the useful part",
+            "Stop recording when the segment you need is finished.",
+          ],
+          [
+            "Trim the waveform",
+            "Remove silence, intros, or extra audio before the final export.",
+          ],
+          [
+            "Download the MP3",
+            "Save the finished file locally with a clear filename.",
+          ],
+        ],
+      },
+      {
+        label: "Why MP3",
+        title: "MP3 is practical for everyday browser audio",
+        body: [
+          "MP3 files are smaller than uncompressed audio and work well for lectures, interviews, spoken notes, web-player clips, and reference audio.",
+          "Dolphin focuses on quick browser audio capture and local MP3 download instead of advanced audio production.",
+        ],
+        formatComparison: true,
+      },
+      {
+        label: "Before saving",
+        title: "Trim the recording before you download",
+        body: [
+          "Browser audio recordings often include a few seconds of setup, silence, or extra playback after the useful part ends.",
+          "Dolphin shows a waveform so you can keep the important section before downloading the MP3.",
+        ],
+        featureSplit: {
+          image: "/assets/dolphin-trim-1280x800.png",
+          alt: "Dolphin trim editor before saving browser audio as MP3",
+          items: [
+            ["Find the useful part", "Use the waveform to see where the audio starts and ends."],
+            ["Preview the segment", "Check the kept part before saving the MP3."],
+            ["Avoid extra editing", "Download a cleaner file without opening another editor."],
+          ],
+        },
+      },
+      {
+        label: "Privacy",
+        title: "The MP3 is saved on your device",
+        body: [
+          "Dolphin records and encodes browser audio locally in Chrome. The MP3 is downloaded to your device and is not uploaded by the extension.",
+        ],
+        link: ["/privacy/", "Read the privacy details"],
+      },
+      {
+        label: "Related guide",
+        title: "Need the full tab recording workflow?",
+        body: [
+          "If you are still choosing the right source tab or troubleshooting silent recordings, start with the tab audio recorder guide.",
+        ],
+        link: ["/tab-audio-recorder/", "Read the tab audio recorder guide"],
+      },
+    ],
+    faq: [
+      {
+        q: "How do I save browser audio as MP3?",
+        a: "Open the audio in a Chrome tab, start Dolphin, stop when finished, trim the waveform, and download the final MP3 file.",
+      },
+      {
+        q: "Does Dolphin export WAV files?",
+        a: "No. The current release focuses on MP3 export.",
+      },
+      {
+        q: "Can I edit the browser audio before saving?",
+        a: "You can trim the start and end of the recording before downloading the MP3.",
+      },
+      {
+        q: "Is the MP3 uploaded anywhere?",
+        a: "No. Dolphin processes recordings locally in Chrome and saves the MP3 to your device.",
+      },
+      {
+        q: "Can I save audio from protected streams as MP3?",
+        a: "Some protected or DRM-based content may not be available to browser tab capture. Always record audio you have the right to capture.",
       },
     ],
     schema: ["HowTo", "FAQPage", "BreadcrumbList"],
