@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://betagg.github.io/tab-audio-recorder/sitemap.xml
+Sitemap: https://dolphintab.xyz/sitemap.xml

@@ -3,10 +3,10 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 const docsDir = path.join(root, "docs");
-const siteUrl = "https://betagg.github.io/tab-audio-recorder";
+const siteUrl = "https://dolphintab.xyz";
 const chromeStoreUrl =
   "https://chromewebstore.google.com/detail/dolphin-tab-audio-recorde/idobmddfgnpambpaaaejbdhipholhjlh?utm_source=website&utm_medium=cta&utm_campaign=seo_site";
-const updatedAt = "2026-07-10";
+const updatedAt = "2026-07-11";
 
 const firstLaunchPages = [
   "index.html",
@@ -21,6 +21,8 @@ const stalePageDirs = [
   "browser-audio-recorder",
   "record-webinar-audio",
 ];
+
+const customDomain = "dolphintab.xyz";
 
 const navLinks = [
   ["/", "Chrome Audio Recorder"],
@@ -1672,6 +1674,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 
   fs.writeFileSync(path.join(docsDir, "sitemap.xml"), sitemap);
   fs.writeFileSync(path.join(docsDir, "robots.txt"), robots);
+  fs.writeFileSync(path.join(docsDir, "CNAME"), `${customDomain}\n`);
   fs.writeFileSync(path.join(docsDir, ".nojekyll"), "");
 }
 

@@ -3,6 +3,7 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 const docsDir = path.join(root, "docs");
+const siteUrl = "https://dolphintab.xyz";
 
 const requiredPages = [
   "index.html",
@@ -21,6 +22,7 @@ const requiredAssets = [
   "assets/dolphin-promo-440x280.png",
   "sitemap.xml",
   "robots.txt",
+  "CNAME",
   ".nojekyll",
 ];
 
@@ -82,7 +84,7 @@ const sitemap = fs.readFileSync(path.join(docsDir, "sitemap.xml"), "utf8");
 for (const page of requiredPages) {
   const urlPath =
     page === "index.html" ? "/" : `/${page.replace(/index\.html$/, "")}`;
-  if (!sitemap.includes(`https://betagg.github.io/tab-audio-recorder${urlPath}`)) {
+  if (!sitemap.includes(`${siteUrl}${urlPath}`)) {
     fail(`sitemap.xml missing ${urlPath}`);
   }
 }
@@ -92,14 +94,19 @@ for (const staleUrl of [
   "/browser-audio-recorder/",
   "/record-webinar-audio/",
 ]) {
-  if (sitemap.includes(`https://betagg.github.io/tab-audio-recorder${staleUrl}`)) {
+  if (sitemap.includes(`${siteUrl}${staleUrl}`)) {
     fail(`sitemap.xml still includes stale URL ${staleUrl}`);
   }
 }
 
 const robots = fs.readFileSync(path.join(docsDir, "robots.txt"), "utf8");
-if (!robots.includes("Sitemap: https://betagg.github.io/tab-audio-recorder/sitemap.xml")) {
+if (!robots.includes(`Sitemap: ${siteUrl}/sitemap.xml`)) {
   fail("robots.txt is missing sitemap URL.");
+}
+
+const cname = fs.readFileSync(path.join(docsDir, "CNAME"), "utf8").trim();
+if (cname !== "dolphintab.xyz") {
+  fail(`CNAME must be dolphintab.xyz. Found ${cname}`);
 }
 
 console.log("Static SEO site verified.");
