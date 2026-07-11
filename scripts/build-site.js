@@ -226,19 +226,19 @@ const pages = [
   {
     path: "tab-audio-recorder/index.html",
     url: "/tab-audio-recorder/",
-    title: "Tab Audio Recorder for Chrome - Capture Sound From One Browser Tab",
+    title: "Tab Audio Recorder for Chrome - Record One Tab as MP3",
     description:
-      "Use Dolphin as a tab audio recorder for Chrome. Capture sound from the current browser tab and save it locally as MP3.",
+      "Use Dolphin to record audio from one Chrome tab and save it locally as MP3. No screen recording, no microphone capture, and no uploads.",
     h1: "Tab Audio Recorder for Chrome",
     kicker: "Tab audio recorder",
     subcopy:
-      "Use Dolphin when you need to record audio from one Chrome tab, not your microphone, desktop, or whole screen.",
+      "Record audio from the active Chrome tab and save the useful part as a local MP3. No screen recording, microphone capture, or desktop audio routing.",
     image: "/assets/dolphin-trim-1280x800.png",
     imageAlt:
       "Dolphin tab audio recorder waveform editor before saving MP3",
     trust: [
-      "Records one active tab",
-      "Waveform trim before saving",
+      "Record one active tab",
+      "Trim before saving",
       "Local MP3 download",
     ],
     sections: [
@@ -246,26 +246,57 @@ const pages = [
         label: "Definition",
         title: "What is a tab audio recorder?",
         body: [
-          "A tab audio recorder captures sound from a specific browser tab. That is different from a voice recorder, a system audio recorder, or a screen recorder.",
+          "A tab audio recorder captures sound from a specific browser tab. It is different from a voice recorder, a system audio recorder, and a screen recorder.",
           "Dolphin is made for the moment when you hear useful audio in Chrome and want a clean local file without setting up OBS, QuickTime, Audacity, or a virtual audio route.",
+          "Instead of recording your whole screen or desktop sound, Dolphin focuses on the active tab you choose and downloads the result as an MP3 file.",
         ],
       },
       {
         id: "how-it-works",
         label: "Workflow",
-        title: "How to record tab audio in Chrome",
+        title: "How to record audio from a Chrome tab",
         steps: [
           [
             "Open the tab with audio",
-            "Make sure the tab is playing audible sound and is not muted.",
+            "Open the Chrome tab that contains the lecture, webinar, podcast, web player, or website audio you want to capture.",
           ],
           [
-            "Start recording",
-            "Click Dolphin from the Chrome toolbar and start capturing the current tab.",
+            "Make sure the tab is audible",
+            "Play the audio and check that the tab is not muted. Dolphin records the active tab audio it can hear.",
           ],
           [
-            "Stop and save",
+            "Start Dolphin",
+            "Click Dolphin from the Chrome toolbar and start recording the current tab.",
+          ],
+          [
+            "Trim the useful segment",
+            "When the recording is done, use the waveform view to keep the part that matters.",
+          ],
+          [
+            "Download the MP3",
             "Trim the useful segment and save the recording as an MP3 file.",
+          ],
+        ],
+      },
+      {
+        label: "Best fit",
+        title: "When a Chrome tab audio recorder is the right tool",
+        cards: [
+          [
+            "Lectures and courses",
+            "Record tab audio from online lessons, language material, training videos, and course players when you have the right to keep a copy.",
+          ],
+          [
+            "Webinars and interviews",
+            "Save spoken browser audio without creating a large screen recording.",
+          ],
+          [
+            "Podcasts and web players",
+            "Capture useful reference audio from browser players and trim the important segment before downloading.",
+          ],
+          [
+            "QA and documentation",
+            "Record website audio behavior from one tab for bug reports, product review, or reproducible notes.",
           ],
         ],
       },
@@ -292,6 +323,36 @@ const pages = [
         ],
       },
       {
+        label: "Not a screen recorder",
+        title: "Record the tab audio, not the whole screen",
+        body: [
+          "If you only need sound, a screen recorder adds extra work: capture video, export a large file, convert it, and clean up the result.",
+          "Dolphin keeps the workflow smaller. It records Chrome tab audio, lets you trim the useful part, and saves a local MP3.",
+        ],
+      },
+      {
+        label: "Troubleshooting",
+        title: "If your tab audio recording is silent",
+        cards: [
+          [
+            "Check the active tab",
+            "Start recording from the tab that is actually playing audio.",
+          ],
+          [
+            "Unmute the tab",
+            "A muted tab or silent website player can create a silent recording.",
+          ],
+          [
+            "Avoid switching sources",
+            "If a site reloads or changes players, stop and start a fresh recording from the current tab.",
+          ],
+          [
+            "Protected content",
+            "Some DRM-based or protected streams may not be available to browser tab capture.",
+          ],
+        ],
+      },
+      {
         label: "Keyboard control",
         title: "A shortcut for moments that start suddenly",
         body: [
@@ -308,8 +369,20 @@ const pages = [
         ],
         link: ["/privacy/", "Learn more about Dolphin privacy"],
       },
+      {
+        label: "Related guide",
+        title: "Need to record audio from a website?",
+        body: [
+          "If your search started with a website player instead of the word tab, the workflow is the same: open the site in Chrome, start Dolphin on that active tab, then save the recording locally.",
+        ],
+        link: ["/record-audio-from-website/", "Read the website audio recording guide"],
+      },
     ],
     faq: [
+      {
+        q: "How do I record audio from a Chrome tab?",
+        a: "Open the Chrome tab with audio, make sure it is not muted, start Dolphin from the toolbar, stop when finished, trim the useful segment, and download the MP3 file.",
+      },
       {
         q: "Can Dolphin record only one tab?",
         a: "Yes. Dolphin is designed to capture the active Chrome tab after you start recording.",
@@ -323,6 +396,10 @@ const pages = [
         a: "No. Recordings are processed locally in Chrome and downloaded to your device.",
       },
       {
+        q: "Is Dolphin a screen recorder?",
+        a: "No. Dolphin does not record your screen or create video files. It focuses on audio from the active Chrome tab.",
+      },
+      {
         q: "What if the tab is muted?",
         a: "If the tab is muted or not playing audible audio, the recording may be silent. Unmute the tab before recording.",
       },
@@ -334,8 +411,12 @@ const pages = [
         q: "Does it also record microphone or system audio?",
         a: "No. Dolphin records the active tab audio only. It is not a microphone or full system audio recorder.",
       },
+      {
+        q: "Can I record audio from a website with Dolphin?",
+        a: "Yes, when the website audio is playing in the active Chrome tab and is not protected in a way that blocks browser tab capture.",
+      },
     ],
-    schema: ["SoftwareApplication", "FAQPage", "BreadcrumbList"],
+    schema: ["SoftwareApplication", "HowTo", "FAQPage", "BreadcrumbList"],
   },
   {
     path: "record-audio-from-website/index.html",
@@ -861,8 +942,10 @@ function renderPricingPanel(page) {
 
 function renderSection(section, page) {
   const pagePath = page.path;
+  const linkTrack =
+    section.link?.[0] === "/privacy/" ? "privacy_link_click" : "internal_link_click";
   const link = section.link
-    ? `<a class="text-link" data-track="privacy_link_click" href="${localUrl(
+    ? `<a class="text-link" data-track="${linkTrack}" href="${localUrl(
         section.link[0],
         pagePath
       )}">${esc(section.link[1])}</a>`
