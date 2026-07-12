@@ -100,6 +100,7 @@ const pages = [
     image: "/assets/dolphin-recording-1280x800.png",
     imageAlt:
       "Dolphin Chrome audio recorder popup recording current tab audio",
+    hideHeroTrust: true,
     trust: [
       "Current tab audio",
       "Local MP3",
@@ -1043,6 +1044,7 @@ const pages = [
       "当你只想保存网页里的音频时，Dolphin 可以直接录制当前标签页声音，剪掉不需要的片段，然后下载本地 MP3。",
     image: "/assets/dolphin-recording-1280x800.png",
     imageAlt: "Dolphin Chrome 标签页录音插件正在录制当前标签页声音",
+    hideHeroTrust: true,
     trust: ["当前标签页录音", "本地保存 MP3", "不录屏、不上传"],
     sections: [
       {
@@ -1446,6 +1448,10 @@ function renderPage(page) {
         page.imageWidth || 1280
       }" height="${page.imageHeight || 800}">
       </figure>`;
+  const heroTrustMarkup = page.hideHeroTrust
+    ? ""
+    : `${renderTrust(page.trust)}
+          <p class="privacy-note">${privacyNote}</p>`;
 
   return `<!doctype html>
 <html lang="${pageLang}">
@@ -1494,8 +1500,7 @@ function renderPage(page) {
               "hero"
             )}">${ctaText}</a>
           </div>
-          ${renderTrust(page.trust)}
-          <p class="privacy-note">${privacyNote}</p>
+          ${heroTrustMarkup}
         </div>
         ${heroMedia}
       </section>
