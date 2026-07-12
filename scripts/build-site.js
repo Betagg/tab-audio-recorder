@@ -1496,7 +1496,7 @@ function renderPage(page) {
           <h1>${esc(page.h1)}</h1>
           <p class="hero-subcopy">${esc(page.subcopy)}</p>
           <div class="hero-actions">
-            <a class="button primary" data-track="cta_add_to_chrome_click" href="${trackedUrl(
+            <a class="button primary chrome-button" data-track="cta_add_to_chrome_click" href="${trackedUrl(
               "hero"
             )}">${ctaText}</a>
           </div>
@@ -1512,7 +1512,7 @@ function renderPage(page) {
           <p class="eyebrow">${bottomEyebrow}</p>
           <h2>${bottomTitle}</h2>
         </div>
-        <a class="button primary" data-track="cta_add_to_chrome_click" href="${trackedUrl(
+        <a class="button primary chrome-button" data-track="cta_add_to_chrome_click" href="${trackedUrl(
           "bottom"
         )}">${ctaText}</a>
       </section>
@@ -1662,6 +1662,20 @@ img { display: block; max-width: 100%; }
   color: #fff;
   box-shadow: 0 14px 34px rgba(228, 45, 98, 0.2);
 }
+.button.chrome-button {
+  gap: 10px;
+}
+.button.chrome-button::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #4285f4 0 28%, #fff 29% 40%, transparent 41%),
+    conic-gradient(from 30deg, #ea4335 0 33%, #fbbc05 0 66%, #34a853 0 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+}
 .button.secondary {
   background: #fff;
   border-color: var(--line);
@@ -1736,6 +1750,17 @@ p { color: var(--muted); }
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 24px;
+}
+.hero-actions .button.primary {
+  min-height: 58px;
+  border-radius: 14px;
+  padding: 0 30px;
+  font-size: 20px;
+  box-shadow: 0 18px 42px rgba(228, 45, 98, 0.26);
+}
+.hero-actions .button.chrome-button::before {
+  width: 24px;
+  height: 24px;
 }
 .trust-list {
   display: grid;
