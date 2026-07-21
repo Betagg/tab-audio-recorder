@@ -1094,13 +1094,14 @@ const pages = [
   {
     path: "save-browser-audio-as-mp3/index.html",
     url: "/save-browser-audio-as-mp3/",
-    title: "Save Browser Audio as MP3 - Record Chrome Tab Audio",
+    updatedAt: "2026-07-22",
+    title: "How to Save Browser Audio as MP3 in Chrome",
     description:
-      "Save browser audio as MP3 with Dolphin. Record audio from the active Chrome tab, trim the useful segment, and download a local MP3 file.",
-    h1: "Save Browser Audio as MP3",
-    kicker: "MP3 browser audio",
+      "Learn how to save browser audio as MP3 in Chrome. Record the active tab, prevent silent files, trim the useful segment, and download it locally.",
+    h1: "How to Save Browser Audio as MP3",
+    kicker: "Browser audio to MP3",
     subcopy:
-      "Record the audio playing in a Chrome tab, trim away the extra parts, and save the result as a local MP3 file.",
+      "Record sound from the active Chrome tab, check the result, trim away extra playback, and download a local MP3 without recording your screen.",
     image: "/assets/dolphin-trim-1280x800.png",
     imageAlt: "Saving browser audio as MP3 after trimming in Dolphin",
     trust: [
@@ -1109,6 +1110,19 @@ const pages = [
       "Local download",
     ],
     sections: [
+      {
+        label: "Quick answer",
+        title: "Use tab capture when the audio already plays in Chrome",
+        body: [
+          "Saving browser audio as MP3 is different from downloading an existing media file. A tab recorder captures the sound produced by the active Chrome tab while it plays, then encodes that recording as a new MP3.",
+          "Dolphin is designed for this focused workflow. It records one active tab, does not capture the screen or microphone, and lets you trim the result before the local download.",
+        ],
+        cards: [
+          ["Good fit", "Lectures, webinars, podcasts, interviews, web players, and other audible content in one Chrome tab."],
+          ["Use a direct download first", "If the publisher provides an official audio download, use it because it preserves the original file."],
+          ["Use another tool", "Choose a screen recorder for video, a microphone recorder for your voice, or a system recorder for multiple apps."],
+        ],
+      },
       {
         id: "how-it-works",
         label: "Steps",
@@ -1119,38 +1133,55 @@ const pages = [
             "Play the website, lecture, webinar, podcast, or web player audio in a Chrome tab.",
           ],
           [
-            "Start a Dolphin recording",
-            "Use Dolphin from the active tab so the recorder captures the browser audio source.",
+            "Confirm the tab is audible",
+            "Listen briefly and check that the Chrome tab and website player are not muted.",
           ],
           [
-            "Stop after the useful part",
-            "Stop recording when the segment you need is finished.",
+            "Start Dolphin on that tab",
+            "Open the extension while the audio tab is active, then start the current-tab recording.",
           ],
           [
-            "Trim the waveform",
-            "Remove silence, intros, or extra audio before the final export.",
+            "Let the source play normally",
+            "Avoid muting, reloading, or replacing the source tab while the recording is running.",
+          ],
+          [
+            "Stop and trim the waveform",
+            "Stop after the useful part, then remove silence, intros, or extra playback from the start and end.",
           ],
           [
             "Download the MP3",
-            "Save the finished file locally with a clear filename.",
+            "Preview the kept segment, use a clear filename, and save the finished file through Chrome downloads.",
           ],
+        ],
+      },
+      {
+        label: "Before recording",
+        title: "A short checklist prevents most unusable MP3 files",
+        body: [
+          "A browser recorder can only capture the source that Chrome makes available. Check the basics before a long session instead of discovering silence or interruptions at the end.",
+        ],
+        cards: [
+          ["Correct active tab", "Start Dolphin while the exact tab playing the audio is active."],
+          ["Audible playback", "Confirm both the tab speaker control and the website player are unmuted."],
+          ["Stable source", "Let the media load and close prompts that could pause playback before recording."],
+          ["Short test", "Record a brief sample first when the source is important or the session will be long."],
         ],
       },
       {
         label: "Why MP3",
-        title: "MP3 is practical for everyday browser audio",
+        title: "Choose MP3 for listening, notes, and smaller files",
         body: [
-          "MP3 files are smaller than uncompressed audio and work well for lectures, interviews, spoken notes, web-player clips, and reference audio.",
-          "Dolphin focuses on quick browser audio capture and local MP3 download instead of advanced audio production.",
+          "MP3 is a compressed audio format with broad support across phones, computers, note apps, and media players. It is practical for lectures, interviews, spoken reference clips, and offline review.",
+          "WAV is usually better when an uncompressed source is required for production editing, but the files are much larger. The current Dolphin release exports MP3 rather than WAV.",
         ],
         formatComparison: true,
       },
       {
-        label: "Before saving",
-        title: "Trim the recording before you download",
+        label: "Cleaner output",
+        title: "Improve the MP3 before you download it",
         body: [
-          "Browser audio recordings often include a few seconds of setup, silence, or extra playback after the useful part ends.",
-          "Dolphin shows a waveform so you can keep the important section before downloading the MP3.",
+          "The quality of a tab recording depends first on the source playback. A low-volume, interrupted, or distorted stream cannot be restored simply by exporting it as MP3.",
+          "Dolphin shows a waveform after recording so you can keep the useful range and remove setup time or unwanted playback before the file is saved.",
         ],
         featureSplit: {
           image: "/assets/dolphin-trim-1280x800.png",
@@ -1158,15 +1189,37 @@ const pages = [
           items: [
             ["Find the useful part", "Use the waveform to see where the audio starts and ends."],
             ["Preview the segment", "Check the kept part before saving the MP3."],
-            ["Avoid extra editing", "Download a cleaner file without opening another editor."],
+            ["Trim both ends", "Remove silence, countdowns, intros, or playback that continued after the useful part."],
+            ["Use a useful filename", "Name the file by topic, source, or date so it is easy to find later."],
           ],
         },
+      },
+      {
+        label: "Troubleshooting",
+        title: "Fix silent, incomplete, or interrupted browser audio",
+        body: [
+          "If the saved MP3 is silent or shorter than expected, check the capture source before repeating the full recording.",
+        ],
+        cards: [
+          ["Silent MP3", "Verify that the correct tab was active, the tab was audible, and the website player was not muted."],
+          ["Recording stopped", "Keep Chrome open and avoid closing, replacing, or reloading the source tab during capture."],
+          ["Missing protected audio", "Some DRM or protected playback may not be exposed to Chrome tab capture."],
+          ["Wrong source", "Dolphin records one active tab, not your microphone, every tab, or all desktop applications."],
+        ],
+      },
+      {
+        label: "Limits and rights",
+        title: "Record only audio you are allowed to keep",
+        body: [
+          "A tab recorder does not override website permissions, subscriptions, DRM, or copyright rules. Some protected streams may be unavailable even when you can hear them in Chrome.",
+          "Use Dolphin for your own content, permitted recordings, personal notes, or material whose owner allows capture. Do not redistribute recordings unless you have the necessary rights and consent.",
+        ],
       },
       {
         label: "Privacy",
         title: "The MP3 is saved on your device",
         body: [
-          "Dolphin records and encodes browser audio locally in Chrome. The MP3 is downloaded to your device and is not uploaded by the extension.",
+          "Dolphin records and encodes browser audio locally in Chrome. The extension downloads the finished MP3 to your device and does not upload the recording.",
         ],
         link: ["/privacy/", "Read the privacy details"],
       },
@@ -1198,7 +1251,7 @@ const pages = [
     faq: [
       {
         q: "How do I save browser audio as MP3?",
-        a: "Open the audio in a Chrome tab, start Dolphin, stop when finished, trim the waveform, and download the final MP3 file.",
+        a: "Open the audio in a Chrome tab, confirm the tab is audible, start Dolphin on that tab, stop when finished, trim the waveform, preview the kept segment, and download the MP3.",
       },
       {
         q: "Does Dolphin export WAV files?",
@@ -1206,7 +1259,7 @@ const pages = [
       },
       {
         q: "Can I edit the browser audio before saving?",
-        a: "You can trim the start and end of the recording before downloading the MP3.",
+        a: "You can trim the start and end of the recording and preview the kept segment before downloading the MP3. Dolphin is not a multitrack audio editor.",
       },
       {
         q: "Is the MP3 uploaded anywhere?",
@@ -1215,6 +1268,18 @@ const pages = [
       {
         q: "Can I save audio from protected streams as MP3?",
         a: "Some protected or DRM-based content may not be available to browser tab capture. Always record audio you have the right to capture.",
+      },
+      {
+        q: "Why is my browser audio MP3 silent?",
+        a: "The wrong tab may have been active, the Chrome tab or website player may have been muted, or the source may have been protected or reloaded during recording.",
+      },
+      {
+        q: "Does saving browser audio as MP3 record my screen?",
+        a: "No. Dolphin records audio from the active Chrome tab and does not create a screen recording or video file.",
+      },
+      {
+        q: "Can Dolphin save audio from several tabs in one MP3?",
+        a: "No. Dolphin records the active Chrome tab after you start recording. It is not a full browser or system audio mixer.",
       },
     ],
     schema: ["HowTo", "FAQPage", "BreadcrumbList"],
