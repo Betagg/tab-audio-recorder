@@ -40,7 +40,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   gap: 22px;
   min-height: 72px;
-  padding: 14px max(24px, calc((100vw - 1160px) / 2));
+  padding: 14px max(24px, calc((100vw - 1320px) / 2));
   background: rgba(246, 248, 251, 0.9);
   border-bottom: 1px solid rgba(216, 225, 236, 0.84);
   backdrop-filter: blur(16px);
