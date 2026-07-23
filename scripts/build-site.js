@@ -240,13 +240,14 @@ const pages = [
   {
     path: "tab-audio-recorder/index.html",
     url: "/tab-audio-recorder/",
-    title: "Tab Audio Recorder for Chrome - Record One Tab as MP3",
+    updatedAt: "2026-07-23",
+    title: "Chrome Tab Audio Recorder - Record One Tab as MP3",
     description:
-      "Use Dolphin to record audio from one Chrome tab and save it locally as MP3. No screen recording, no microphone capture, and no uploads.",
-    h1: "Tab Audio Recorder for Chrome",
-    kicker: "Tab audio recorder",
+      "Record Chrome tab audio and save one active tab as a local MP3. Learn what is captured, prevent silent files, trim the result, and understand the limits.",
+    h1: "Chrome Tab Audio Recorder",
+    kicker: "Record one active tab",
     subcopy:
-      "Record audio from the active Chrome tab and save the useful part as a local MP3. No screen recording, microphone capture, or desktop audio routing.",
+      "Capture sound from one active Chrome tab, check the result, trim the useful part, and download a local MP3 without recording your screen or microphone.",
     image: "/assets/dolphin-trim-1280x800.png",
     imageAlt:
       "Dolphin tab audio recorder waveform editor before saving MP3",
@@ -256,6 +257,14 @@ const pages = [
       "Local MP3 download",
     ],
     sections: [
+      {
+        label: "Quick answer",
+        title: "Record the tab that is playing the audio",
+        body: [
+          "A Chrome tab audio recorder captures the sound produced by one browser tab. Open the tab, confirm that its player is audible, start Dolphin on that tab, stop when the useful audio ends, then trim and download the recording as MP3.",
+          "This is a focused alternative to screen recording when you need the sound but not the video, microphone, or audio from other desktop applications.",
+        ],
+      },
       {
         label: "Definition",
         title: "What is a tab audio recorder?",
@@ -276,20 +285,37 @@ const pages = [
           ],
           [
             "Make sure the tab is audible",
-            "Play the audio and check that the tab is not muted. Dolphin records the active tab audio it can hear.",
+            "Play a short sample and check that the Chrome tab and website player are not muted. Dolphin can only capture audio Chrome exposes from that tab.",
           ],
           [
             "Start Dolphin",
             "Click Dolphin from the Chrome toolbar and start recording the current tab.",
           ],
           [
-            "Trim the useful segment",
-            "When the recording is done, use the waveform view to keep the part that matters.",
+            "Keep the source tab stable",
+            "Let the audio play normally. Avoid closing, replacing, or reloading the source tab during the recording.",
+          ],
+          [
+            "Stop and check the waveform",
+            "When the useful audio ends, stop recording and confirm that the waveform contains sound before trimming.",
           ],
           [
             "Download the MP3",
-            "Trim the useful segment and save the recording as an MP3 file.",
+            "Preview the kept segment, trim extra playback from both ends, and save the recording as a local MP3 file.",
           ],
+        ],
+      },
+      {
+        label: "Capture boundary",
+        title: "Know what a Chrome tab recorder will and will not capture",
+        body: [
+          "Choosing the correct recorder starts with the audio source. Dolphin is intentionally limited to the active Chrome tab instead of mixing every sound on your computer.",
+        ],
+        cards: [
+          ["Included", "Audible media produced by the active Chrome tab after recording starts."],
+          ["Not included", "Microphone input, room sound, other browser tabs, notifications, or desktop applications."],
+          ["Not a screen recording", "No video, cursor movement, page visuals, or display capture is added to the MP3."],
+          ["May be unavailable", "Some DRM-protected players or streams may not expose audio to Chrome tab capture."],
         ],
       },
       {
@@ -337,6 +363,23 @@ const pages = [
         ],
       },
       {
+        label: "Before recording",
+        title: "Run a short tab audio check before a long session",
+        body: [
+          "A ten-second test is faster than repeating a lecture or webinar. Confirm the source and output before the important part begins.",
+        ],
+        featureSplit: {
+          image: "/assets/dolphin-trim-1280x800.png",
+          imageAlt: "Dolphin waveform after recording audio from a Chrome tab",
+          items: [
+            ["Use the exact source tab", "Start the extension while the tab playing the audio is active."],
+            ["Check both mute controls", "Confirm the Chrome tab and the website player are audible."],
+            ["Record a short sample", "Stop, inspect the waveform, and preview the sample before a long capture."],
+            ["Prepare a filename", "Use a topic, source, or date so the downloaded MP3 is easy to identify."],
+          ],
+        },
+      },
+      {
         label: "Not a screen recorder",
         title: "Record the tab audio, not the whole screen",
         body: [
@@ -358,12 +401,20 @@ const pages = [
           ],
           [
             "Avoid switching sources",
-            "If a site reloads or changes players, stop and start a fresh recording from the current tab.",
+            "If the site reloads, replaces the player, or opens the media in a new tab, stop and start a fresh recording from the correct tab.",
           ],
           [
             "Protected content",
             "Some DRM-based or protected streams may not be available to browser tab capture.",
           ],
+        ],
+      },
+      {
+        label: "Limits and rights",
+        title: "Use tab recording only when you have permission",
+        body: [
+          "A browser recorder does not bypass website access controls, subscriptions, DRM, copyright, or consent requirements. Use Dolphin for your own material, permitted recordings, personal notes, or audio whose owner allows capture.",
+          "For live meetings or conversations, follow applicable consent rules. Do not redistribute a recording unless you have the necessary rights.",
         ],
       },
       {
@@ -411,7 +462,7 @@ const pages = [
     faq: [
       {
         q: "How do I record audio from a Chrome tab?",
-        a: "Open the Chrome tab with audio, make sure it is not muted, start Dolphin from the toolbar, stop when finished, trim the useful segment, and download the MP3 file.",
+        a: "Open the Chrome tab with audio, confirm the tab and website player are audible, start Dolphin from the toolbar, keep the source tab stable, stop when finished, trim the useful segment, and download the MP3 file.",
       },
       {
         q: "Can Dolphin record only one tab?",
@@ -431,7 +482,7 @@ const pages = [
       },
       {
         q: "What if the tab is muted?",
-        a: "If the tab is muted or not playing audible audio, the recording may be silent. Unmute the tab before recording.",
+        a: "If the Chrome tab or website player is muted, the recording may be silent. Unmute both controls and make a short test recording before a long session.",
       },
       {
         q: "Can it record long sessions?",
@@ -444,6 +495,10 @@ const pages = [
       {
         q: "Can I record audio from a website with Dolphin?",
         a: "Yes, when the website audio is playing in the active Chrome tab and is not protected in a way that blocks browser tab capture.",
+      },
+      {
+        q: "Why did my tab recording stop after the page changed?",
+        a: "Reloading, closing, replacing, or moving the media to another tab can interrupt the original capture source. Start a fresh recording from the tab that now contains the audio.",
       },
     ],
     schema: ["SoftwareApplication", "HowTo", "FAQPage", "BreadcrumbList"],
