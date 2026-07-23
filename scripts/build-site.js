@@ -1415,76 +1415,167 @@ const pages = [
   {
     path: "support/index.html",
     url: "/support/",
-    title: "Dolphin Support - Chrome Tab Audio Recording Help",
+    updatedAt: "2026-07-24",
+    title: "Chrome Tab Audio Recorder No Sound? Dolphin Troubleshooting",
     description:
-      "Get help with Dolphin Tab Audio Recorder, including no sound, export issues, Chrome permissions, muted tabs, and protected content.",
-    h1: "Support",
-    kicker: "Dolphin support",
+      "Fix silent Chrome tab recordings, unexpected stops, MP3 download issues, and permission problems with this practical Dolphin troubleshooting guide.",
+    h1: "Fix Chrome Tab Audio Recording Problems",
+    kicker: "Dolphin troubleshooting",
     subcopy:
-      "Troubleshooting help for recording Chrome tab audio and saving local MP3 files.",
+      "Run a short test, identify where the audio path failed, and fix the recording before repeating a long session.",
     image: "/assets/dolphin-promo-440x280.png",
-    imageAlt: "Dolphin Tab Audio Recorder promotional card",
+    imageAlt: "Dolphin Tab Audio Recorder interface for troubleshooting Chrome tab audio",
     imageWidth: 440,
     imageHeight: 280,
     trust: [
-      "No-sound checklist",
-      "Chrome permission help",
-      "Export troubleshooting",
+      "10-second test workflow",
+      "Silent recording checks",
+      "MP3 download fixes",
     ],
     sections: [
       {
-        label: "No sound",
-        title: "No sound in recording",
+        label: "Start here",
+        title: "Run a 10-second recording test",
         body: [
-          "Make sure the tab is playing audible audio and is not muted. Start recording from the active tab that contains the audio.",
-          "If the website switches players or reloads, stop the recording and start again from the current tab.",
+          "A short test separates a tab-audio problem from a long-session problem. Use the same website and player you plan to record.",
+        ],
+        steps: [
+          [
+            "Open the source tab",
+            "Keep the Chrome tab that is playing the audio visible and active.",
+          ],
+          [
+            "Confirm you can hear it",
+            "Play a normal section and make sure the tab and website player are not muted.",
+          ],
+          [
+            "Start Dolphin",
+            "Begin recording while that source tab is active, then let it run for about 10 seconds.",
+          ],
+          [
+            "Stop and inspect",
+            "Stop before changing pages. Check that the editor shows a waveform and play the preview.",
+          ],
+          [
+            "Continue only after it passes",
+            "If the preview has sound, restart for the full session. If it is silent, use the checks below.",
+          ],
         ],
       },
       {
-        label: "Recording stops",
+        label: "Silent file",
+        title: "Why a Chrome tab audio recording has no sound",
+        body: [
+          "A silent result usually means the wrong tab was active, the player or tab was muted, playback had not started, or the page changed its audio source after recording began.",
+        ],
+        cards: [
+          [
+            "Check the tab",
+            "Return to the exact tab that is producing sound. Unmute the Chrome tab and keep it active when you start Dolphin.",
+          ],
+          [
+            "Check the player",
+            "Raise the website player's own volume and confirm the current section is not silent before recording.",
+          ],
+          [
+            "Check the waveform",
+            "Stop after 10 seconds. A flat waveform is a reason to restart, not to continue a long capture.",
+          ],
+          [
+            "Restart after page changes",
+            "If the player reloads, opens a new tab, or switches streams, stop and begin a fresh recording from the new active tab.",
+          ],
+        ],
+        link: ["/tab-audio-recorder/", "Open the active-tab recording checklist"],
+      },
+      {
+        label: "Interrupted session",
         title: "Recording stops unexpectedly",
         body: [
-          "Very long recordings depend on Chrome, memory, and device performance. If a recording stops, save the current file and start a new session.",
+          "Tab reloads, browser sleep, changing the captured tab, memory pressure, and very long sessions can interrupt capture.",
+          "Save any usable recording that remains, close unnecessary tabs, keep the computer awake, and record long material in shorter sections. Run another 10-second test before restarting.",
         ],
+        link: ["/record-browser-audio/", "Review the complete Chrome tab recording workflow"],
       },
       {
-        label: "Export",
-        title: "MP3 export issues",
+        label: "Download",
+        title: "The MP3 did not download",
         body: [
-          "Dolphin exports MP3 files through Chrome downloads. If the file does not appear, check Chrome download settings and whether the browser blocked downloads from the extension.",
+          "First confirm the editor contains a waveform and the recording can be previewed. Trim only after you know the audio exists.",
+          "Then check Chrome downloads, the default download folder, available disk space, and whether Chrome blocked or asked where to save the file. Export again only after the current download attempt has finished.",
         ],
+        link: ["/save-browser-audio-as-mp3/", "Follow the MP3 save and trim guide"],
       },
       {
         label: "Permissions",
-        title: "Chrome permission issue",
+        title: "Chrome did not capture the active tab",
         body: [
-          "Dolphin needs permission to capture the active tab audio after you start recording. Reload the page and start again if Chrome permission prompts were dismissed.",
+          "Reload the source page, make it active, and start Dolphin again. If Chrome or the extension was updated, close and reopen the tab before testing.",
+          "Open chrome://extensions, find Dolphin, confirm the extension is enabled, and check that its site access has not been restricted for the page you are testing.",
         ],
       },
       {
-        label: "Protected content",
-        title: "Can Dolphin record protected content?",
+        label: "Isolate the cause",
+        title: "Test a simple public audio page",
         body: [
-          "Dolphin is designed for audio you have the right to capture. Some protected or DRM-based content may not be recordable.",
+          "If one site fails, test Dolphin on a simple public page with ordinary browser audio that you are allowed to record.",
+          "If the simple page works, the original website, player, protection, or tab transition is likely the cause. If both tests fail, restart Chrome and repeat the permission checks.",
+        ],
+      },
+      {
+        label: "Limits",
+        title: "Protected and restricted audio may not be recordable",
+        body: [
+          "Dolphin is designed for audio you have permission to capture. It does not bypass DRM, protected players, website restrictions, or Chrome security boundaries.",
+          "Do not repeatedly change permissions or install unrelated tools to work around a protected source. Use an authorized download or ask the content owner instead.",
+        ],
+        link: ["/privacy/", "Read Dolphin's privacy and recording boundaries"],
+      },
+      {
+        label: "Still stuck",
+        title: "Collect useful details before contacting support",
+        body: [
+          "Include the Chrome version, Dolphin version, the type of website or player, the step that failed, whether the 10-second test produced a waveform, and whether another ordinary audio page worked.",
+          "Do not send private recordings, passwords, payment details, or protected media. Use the support contact shown on Dolphin's Chrome Web Store listing.",
         ],
       },
     ],
     faq: [
       {
         q: "Why is my tab audio recording silent?",
-        a: "The tab may be muted, the website player may be silent, or recording may have started from the wrong tab.",
+        a: "The recording may have started from the wrong active tab, the Chrome tab or website player may be muted, playback may not have started, or the page may have changed its audio source.",
+      },
+      {
+        q: "How can I test Dolphin before a long recording?",
+        a: "Record about 10 seconds from the intended source tab, stop before navigating, and confirm that the editor shows a waveform and the preview contains sound.",
       },
       {
         q: "Why did recording stop?",
-        a: "Long recordings can be affected by browser memory, device performance, or tab reloads.",
+        a: "Tab reloads, browser sleep, changing the captured tab, memory pressure, and very long sessions can interrupt recording. Save the usable part and restart in a shorter section.",
+      },
+      {
+        q: "Why did my recording stop after a page change?",
+        a: "The website may have opened a new tab, reloaded the player, or switched audio streams. Start a new recording from the tab that is now producing the sound.",
+      },
+      {
+        q: "Why is there no MP3 in my Downloads folder?",
+        a: "Confirm the recording has a waveform, then check Chrome downloads, the selected download folder, available disk space, and any blocked-download message.",
+      },
+      {
+        q: "How do I check Dolphin's Chrome permissions?",
+        a: "Open chrome://extensions, find Dolphin, confirm it is enabled, and review whether site access is restricted for the page you are testing.",
       },
       {
         q: "Can I change Chrome shortcuts?",
         a: "Chrome lets users manage extension shortcuts from chrome://extensions/shortcuts.",
       },
       {
+        q: "Can Dolphin record DRM or protected audio?",
+        a: "Not necessarily. Dolphin does not bypass DRM, protected players, website restrictions, or Chrome security boundaries.",
+      },
+      {
         q: "How do I contact support?",
-        a: "Use the support contact listed on the Chrome Web Store page for Dolphin Tab Audio Recorder.",
+        a: "Use the support contact on Dolphin's Chrome Web Store listing. Include your Chrome and Dolphin versions, the failed step, and the result of a 10-second test without attaching private recordings.",
       },
     ],
     schema: ["FAQPage", "BreadcrumbList"],
