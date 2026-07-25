@@ -1342,45 +1342,62 @@ const pages = [
   {
     path: "privacy/index.html",
     url: "/privacy/",
-    title: "Dolphin Privacy - Local Chrome Tab Audio Recording",
+    updatedAt: "2026-07-25",
+    title: "Is Chrome Tab Audio Recording Private? Dolphin Privacy",
     description:
-      "Learn how Dolphin handles Chrome tab audio recording, local files, browser permissions, and privacy.",
-    h1: "Privacy And Local Recording",
-    kicker: "Privacy",
+      "See exactly how Dolphin records Chrome tab audio locally, what metadata stays in browser storage, why each permission is needed, and how to clear history.",
+    h1: "How Dolphin Keeps Tab Audio Recordings Local",
+    kicker: "Dolphin privacy and permissions",
     subcopy:
-      "Dolphin is built for local tab audio recording. Recordings are saved on your device and are not uploaded by the extension.",
-    noImage: true,
+      "Dolphin captures one active Chrome tab after you start recording, encodes the audio locally, and downloads the MP3 to your device.",
+    image: "/assets/dolphin-recording-1280x800.png",
+    imageAlt: "Dolphin Tab Audio Recorder recording interface running locally in Chrome",
+    imageWidth: 1280,
+    imageHeight: 800,
     trust: [
-      "Local tab audio recording",
-      "No recording uploads",
-      "No microphone capture",
+      "No audio uploads",
+      "No account required",
+      "No analytics or ad trackers",
     ],
     sections: [
       {
-        label: "What audio is recorded",
-        title: "Only the active Chrome tab after you start recording",
+        label: "Quick answer",
+        title: "Your tab audio stays in Chrome until you save the MP3",
         body: [
-          "Dolphin captures audio from the active browser tab after you start recording. It does not capture microphone audio and does not record your whole screen.",
+          "The extension receives audio from the active tab only after you start a recording. It encodes that audio inside Chrome and sends the finished MP3 to Chrome's download manager.",
+          "Dolphin does not upload the recording, page title, source URL, filename, or local history to a remote server. The current extension does not include analytics, advertising trackers, or behavioral tracking.",
+        ],
+        cards: [
+          [
+            "Processed locally",
+            "Active-tab audio, trimming, preview, MP3 encoding, and recording history stay in the browser on your device.",
+          ],
+          [
+            "Not collected",
+            "Dolphin does not collect microphone audio, screen video, unrelated tab content, or a background history of the sites you visit.",
+          ],
         ],
       },
       {
-        label: "Where recordings are stored",
-        title: "Recordings are saved on your device",
+        label: "Capture boundary",
+        title: "Dolphin records one active tab, not your whole computer",
         body: [
-          "Audio is encoded locally and downloaded through Chrome's download manager. Local recording history may store lightweight metadata such as page title, source URL, host, duration, save time, and filename.",
+          "Dolphin uses Chrome tab capture for the tab that is active when recording starts. It does not request microphone permission, create screen video, mix several tabs, or capture system-wide audio from other applications.",
+          "Page metadata is read only after a user action. It is used to suggest a useful filename and create a local history entry for the recording you chose to save.",
         ],
       },
       {
-        label: "Uploads",
-        title: "Dolphin does not upload recordings",
+        label: "Local storage",
+        title: "The MP3 and the recording history are different",
         body: [
-          "Recordings, page URLs, page titles, filenames, and recording history are not uploaded by the extension.",
-          "Invite code activation and lifetime purchase checks use a small licensing API. Those requests use a random extension-install device ID, invite or checkout status, and extension version. They are not used to upload recording audio.",
+          "The finished MP3 is downloaded to the location managed by Chrome. Dolphin's history does not keep a second audio copy after saving; it keeps lightweight metadata so you can recognize the source later.",
+          "A history entry can include the page title, source URL, website host, category, recording duration, trim range, save time, and filename. Dolphin keeps up to 50 local history entries.",
+          "Open Recording history in the extension and choose Clear history to remove those entries from Dolphin's local browser storage. Clearing history does not delete MP3 files that Chrome already downloaded.",
         ],
       },
       {
         label: "Permissions",
-        title: "Why Chrome permissions are needed",
+        title: "Each Chrome permission supports a visible recording task",
         cards: [
           [
             "tabCapture",
@@ -1388,7 +1405,7 @@ const pages = [
           ],
           [
             "activeTab and scripting",
-            "Reads lightweight page metadata after user action for filenames and local history.",
+            "Reads the active page title and URL after user action for filename suggestions and local history.",
           ],
           [
             "offscreen",
@@ -1401,16 +1418,80 @@ const pages = [
         ],
       },
       {
+        label: "Accounts and tracking",
+        title: "No account, analytics profile, or advertising identifier",
+        body: [
+          "Dolphin does not require an account. The extension does not sell, transfer, share, or upload recording data or local history.",
+          "The current extension does not use analytics SDKs, advertising pixels, or behavioral tracking. Its permissions are used for the recording workflow described on this page, not to monitor browsing in the background.",
+        ],
+      },
+      {
+        label: "Websites and restrictions",
+        title: "A website's own privacy rules still apply",
+        body: [
+          "The page you record may use its own cookies, analytics, accounts, or media protections. Those systems belong to the website and are separate from Dolphin.",
+          "Some protected or DRM-based media may not be available to Chrome tab capture. Dolphin does not bypass access controls. Record only audio you are allowed to capture and keep.",
+        ],
+      },
+      {
+        label: "Related guidance",
+        title: "Review the recording workflow and troubleshooting steps",
+        cards: [
+          [
+            "Tab recording guide",
+            "See the exact active-tab workflow, capture boundaries, and pre-recording checks.",
+          ],
+          [
+            "Troubleshooting",
+            "Diagnose a silent recording, interrupted capture, or missing MP3 without changing unnecessary permissions.",
+          ],
+        ],
+        link: ["/tab-audio-recorder/", "Read the tab recording guide"],
+      },
+      {
         label: "Contact",
         title: "Support and privacy questions",
         body: [
-          "For support or privacy questions, use the support contact provided on the Chrome Web Store listing.",
+          "For a privacy or support question, include the Chrome version, Dolphin version, page type, and the step where the problem occurred. Do not send private recording files unless you have intentionally chosen to share them.",
         ],
         link: ["/support/", "Open Dolphin support"],
       },
     ],
-    faq: [],
-    schema: ["SoftwareApplication", "BreadcrumbList"],
+    faq: [
+      {
+        q: "Does Dolphin upload my Chrome tab audio?",
+        a: "No. Dolphin records and encodes active-tab audio locally in Chrome, then saves the MP3 through Chrome's download manager.",
+      },
+      {
+        q: "Does Dolphin record my microphone or screen?",
+        a: "No. Dolphin does not request microphone permission and does not create a screen or video recording. It captures audio from one active Chrome tab after you start recording.",
+      },
+      {
+        q: "What information is stored in recording history?",
+        a: "Local history can contain the page title, source URL, website host, category, duration, trim range, save time, and filename. History entries do not contain audio files.",
+      },
+      {
+        q: "How do I delete Dolphin recording history?",
+        a: "Open Recording history in the extension and choose Clear history. This removes Dolphin's local metadata entries but does not delete MP3 files already downloaded through Chrome.",
+      },
+      {
+        q: "Why does Dolphin need activeTab and scripting permissions?",
+        a: "After you start a recording, Dolphin reads lightweight metadata from the active page to suggest a filename and create a recognizable local history entry.",
+      },
+      {
+        q: "Does Dolphin use analytics or advertising trackers?",
+        a: "No. The current extension does not include analytics, advertising trackers, or behavioral tracking.",
+      },
+      {
+        q: "Does Dolphin require an account?",
+        a: "No. You can record permitted tab audio and save MP3 files without creating a Dolphin account.",
+      },
+      {
+        q: "Can Dolphin record protected or DRM audio?",
+        a: "Some protected media may not be available to Chrome tab capture. Dolphin does not bypass access controls, and you should record only audio you have permission to keep.",
+      },
+    ],
+    schema: ["FAQPage", "SoftwareApplication", "BreadcrumbList"],
   },
   {
     path: "support/index.html",
