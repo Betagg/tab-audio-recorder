@@ -94,23 +94,32 @@ const pages = [
   {
     path: "index.html",
     url: "/",
-    title: "Dolphin Tab Audio Recorder - Record Chrome Tab Audio as MP3",
+    updatedAt: "2026-07-27",
+    title: "Dolphin Tab Audio Recorder | Record Chrome Tab Audio as MP3",
     description:
-      "Record audio from any Chrome tab with Dolphin. Save browser audio locally as MP3 with no uploads, no account, and no screen recorder.",
-    h1: "Record Chrome Tab Audio",
-    kicker: "Tab audio recorder",
+      "Record audio playing in one Chrome tab and save it locally as MP3. Dolphin uses no screen recording, uploads, or account.",
+    h1: "Dolphin Tab Audio Recorder",
+    kicker: "Record Chrome tab audio as MP3",
     subcopy:
-      "Save browser audio as a local MP3. No screen recording, uploads, or setup.",
+      "Capture the sound playing in one active Chrome tab, trim the useful part, and download a local MP3.",
     image: "/assets/dolphin-recording-1280x800.png",
     imageAlt:
       "Dolphin Chrome audio recorder popup recording current tab audio",
-    hideHeroTrust: true,
     trust: [
-      "Current tab audio",
-      "Local MP3",
-      "No uploads",
+      "One active Chrome tab",
+      "Local MP3 export",
+      "No audio uploads",
     ],
     sections: [
+      {
+        label: "Quick answer",
+        title: "How do I record a Chrome tab with audio?",
+        body: [
+          "Open the Chrome tab that is playing the audio, start Dolphin from that same tab, then stop when the useful part is finished. Dolphin records the tab sound directly, lets you trim the result, and saves it as an MP3 on your device.",
+          "It does not record your screen, microphone, or full computer audio. Some protected or DRM-based players may block tab capture.",
+        ],
+        link: ["/tab-audio-recorder/", "See the complete Chrome tab audio recording guide"],
+      },
       {
         id: "how-it-works",
         label: "How it works",
@@ -2413,7 +2422,7 @@ main {
   grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
   gap: 44px;
   align-items: center;
-  min-height: calc(100vh - 72px);
+  min-height: min(calc(100vh - 72px), 680px);
   padding: 54px 0 46px;
 }
 .kicker,
@@ -2822,10 +2831,14 @@ details p {
 @media (max-width: 640px) {
   .site-header { padding: 12px 16px; }
   .brand span { max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+  .site-nav,
+  .nav-cta { display: none; }
   main,
   .site-footer { width: min(100% - 24px, 1160px); }
-  .hero { gap: 26px; padding-top: 38px; }
-  h1 { font-size: 42px; }
+  .hero { gap: 18px; padding: 24px 0 26px; }
+  .hero-media { max-height: 170px; overflow: hidden; }
+  .hero-media img { height: 170px; object-fit: cover; object-position: top; }
+  h1 { font-size: 40px; }
   .hero-subcopy { font-size: 18px; }
   .trust-list,
   .steps,
