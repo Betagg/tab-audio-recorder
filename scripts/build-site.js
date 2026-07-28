@@ -118,7 +118,7 @@ const pages = [
           "Open the Chrome tab that is playing the audio, start Dolphin from that same tab, then stop when the useful part is finished. Dolphin records the tab sound directly, lets you trim the result, and saves it as an MP3 on your device.",
           "It does not record your screen, microphone, or full computer audio. Some protected or DRM-based players may block tab capture.",
         ],
-        link: ["/tab-audio-recorder/", "See the complete Chrome tab audio recording guide"],
+        link: ["/record-browser-audio/", "See the complete record-a-Chrome-tab-with-audio guide"],
       },
       {
         id: "how-it-works",
@@ -737,12 +737,12 @@ const pages = [
   {
     path: "record-browser-audio/index.html",
     url: "/record-browser-audio/",
-    updatedAt: "2026-07-18",
-    title: "How to Record Chrome Tab Audio - Save Browser Sound as MP3",
+    updatedAt: "2026-07-28",
+    title: "Record a Chrome Tab With Audio - Save Sound as MP3",
     description:
-      "Learn how to record Chrome tab audio with Dolphin. Capture sound from the active browser tab, trim the useful part, and save a local MP3.",
-    h1: "How to Record Chrome Tab Audio",
-    kicker: "Chrome browser audio guide",
+      "Record a Chrome tab with audio using Dolphin. Capture one active tab, run a 10-second test, trim the result, and save a local MP3.",
+    h1: "Record a Chrome Tab With Audio",
+    kicker: "Chrome tab audio without screen recording",
     subcopy:
       "If you want to record a Chrome tab with audio but only need the sound, Dolphin captures the active tab and saves a local MP3 without screen or microphone recording.",
     image: "/assets/dolphin-recording-1280x800.png",
@@ -753,6 +753,14 @@ const pages = [
       "Local MP3 export",
     ],
     sections: [
+      {
+        label: "Quick answer",
+        title: "How do you record a Chrome tab with audio?",
+        body: [
+          "Open the Chrome tab that is playing the sound, start Dolphin from that same tab, and make a 10-second test recording. Stop, preview the result, then restart for the full recording if the audio is clear.",
+          "When the useful part is finished, stop, trim the beginning and end, and download the MP3. Dolphin captures one tab's audio only; it does not record your screen, microphone, or full system audio. Protected or DRM-based players may block capture.",
+        ],
+      },
       {
         id: "how-it-works",
         label: "Step-by-step",
@@ -765,6 +773,10 @@ const pages = [
           [
             "Start Dolphin on that tab",
             "Click the extension while the audio tab is active so Dolphin captures the right source.",
+          ],
+          [
+            "Run a 10-second test",
+            "Stop and preview a short sample before a long session so you can catch a muted tab, silent player, or blocked source early.",
           ],
           [
             "Listen while recording",
@@ -880,6 +892,15 @@ const pages = [
         ],
       },
       {
+        label: "Troubleshooting",
+        title: "What to check when the MP3 is silent",
+        body: [
+          "Return to the source tab and confirm the website player is producing sound. Check both the player volume and Chrome's tab mute state, then start a new 10-second test from that active tab.",
+          "If the test is still silent, the player may use protected media or a capture method Chrome does not expose. Do not continue a long recording until the short preview contains audio.",
+        ],
+        link: ["/support/", "Open the Dolphin troubleshooting checklist"],
+      },
+      {
         label: "Related guide",
         title: "Is the sound coming from a website player?",
         body: [
@@ -936,6 +957,14 @@ const pages = [
       {
         q: "Where is the browser audio file saved?",
         a: "Dolphin saves the finished MP3 locally through Chrome downloads.",
+      },
+      {
+        q: "Should I test the tab audio before a long recording?",
+        a: "Yes. Make a 10-second recording and preview it first. A short test can reveal a muted tab, silent player, wrong source tab, or protected stream before you spend time on a full recording.",
+      },
+      {
+        q: "Why did Chrome record a silent MP3?",
+        a: "The source tab may have been muted, the website player may not have started, the wrong tab may have been active, or the stream may block browser capture. Check the player and tab volume, then start a fresh 10-second test.",
       },
     ],
     schema: ["HowTo", "FAQPage", "BreadcrumbList"],
