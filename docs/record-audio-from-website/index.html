@@ -21,7 +21,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
     <link rel="stylesheet" href="../assets/site.css">
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Record Audio From a Website","description":"Learn how to record audio from a website in Chrome. Capture the active tab, fix silent recordings, trim the useful part, and save a local MP3.","image":"https://dolphintab.xyz/assets/dolphin-recording-1280x800.png","step":[{"@type":"HowToStep","name":"Install Dolphin from the Chrome Web Store","text":"Add the extension to Chrome and pin it so the recorder is easy to open."},{"@type":"HowToStep","name":"Open the website tab with the audio","text":"Play the course, webinar, podcast, radio stream, or web player audio you need to capture."},{"@type":"HowToStep","name":"Click Dolphin and start recording","text":"Dolphin captures audio from the active tab while you continue listening normally."},{"@type":"HowToStep","name":"Stop recording when finished","text":"Stop when the useful part is done, or trim the segment with the waveform view."},{"@type":"HowToStep","name":"Save the file as MP3","text":"Edit the filename and download the recording to your device through Chrome downloads."}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I record audio from a website in Chrome?","acceptedAnswer":{"@type":"Answer","text":"Install Dolphin, open the website tab with audio, start recording from the extension, stop when finished, and save the local MP3 file."}},{"@type":"Question","name":"Can Dolphin record audio from any website?","acceptedAnswer":{"@type":"Answer","text":"Dolphin works with many websites that play audible tab audio, but it cannot guarantee capture from every site. Protected or DRM-based content may not be recordable."}},{"@type":"Question","name":"Why is my website audio recording silent?","acceptedAnswer":{"@type":"Answer","text":"Check that the correct Chrome tab is active, both the tab and website player are unmuted, and the player did not reload or switch sources during recording."}},{"@type":"Question","name":"Does Dolphin record the website video too?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin records audio from the active Chrome tab only. Use a screen recorder when the final file must include video or on-screen actions."}},{"@type":"Question","name":"Do I need OBS, Audacity, QuickTime, or a virtual audio cable?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin is a Chrome extension workflow for active-tab audio, so you do not need desktop audio routing for supported browser audio."}},{"@type":"Question","name":"Can I save website audio as WAV?","acceptedAnswer":{"@type":"Answer","text":"The current release saves MP3. WAV export is not included yet."}},{"@type":"Question","name":"Is my website audio uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Recording and MP3 encoding run locally in Chrome."}},{"@type":"Question","name":"Can I trim the website audio before downloading it?","acceptedAnswer":{"@type":"Answer","text":"Yes. After recording, use the waveform editor to adjust the start and end before saving the local MP3."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I record audio from a website in Chrome?","acceptedAnswer":{"@type":"Answer","text":"Install Dolphin, open the website tab with audio, start recording from the extension, stop when finished, and save the local MP3 file."}},{"@type":"Question","name":"Can Dolphin record audio from any website?","acceptedAnswer":{"@type":"Answer","text":"Dolphin works with many websites that play audible tab audio, but it cannot guarantee capture from every site. Protected or DRM-based content may not be recordable."}},{"@type":"Question","name":"Why is my website audio recording silent?","acceptedAnswer":{"@type":"Answer","text":"Check that the correct Chrome tab is active, both the tab and website player are unmuted, and the player did not reload or switch sources during recording."}},{"@type":"Question","name":"Does Dolphin record the website video too?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin records audio from the active Chrome tab only. Use a screen recorder when the final file must include video or on-screen actions."}},{"@type":"Question","name":"Do I need OBS, Audacity, QuickTime, or a virtual audio cable?","acceptedAnswer":{"@type":"Answer","text":"No. Dolphin is a Chrome extension workflow for active-tab audio, so you do not need desktop audio routing for supported browser audio."}},{"@type":"Question","name":"Can I save website audio as WAV?","acceptedAnswer":{"@type":"Answer","text":"The current release saves MP3. WAV export is not included yet."}},{"@type":"Question","name":"Is my website audio uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Recording and MP3 encoding run locally in Chrome."}},{"@type":"Question","name":"Can I trim the website audio before downloading it?","acceptedAnswer":{"@type":"Answer","text":"Yes. After recording, use the waveform editor to adjust the start and end before saving the local MP3."}},{"@type":"Question","name":"What happens if a website opens the audio in a new tab?","acceptedAnswer":{"@type":"Answer","text":"Start a fresh recording from the tab where the sound is actually playing. Dolphin keeps recording the tab selected at the start rather than automatically following a player into another tab."}},{"@type":"Question","name":"How should I prepare for a long website audio recording?","acceptedAnswer":{"@type":"Answer","text":"Let the player load, close prompts, keep the source tab audible and stable, check available storage, and make a 10-second test recording before the full session."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dolphintab.xyz/"},{"@type":"ListItem","position":2,"name":"How to Record Audio From a Website","item":"https://dolphintab.xyz/record-audio-from-website/"}]}</script>
   </head>
   <body>
@@ -51,7 +51,21 @@
       </figure>
       </section>
 
-      <section class="section" id="how-it-works">
+      <section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Quick answer</p>
+      <h2>Record the website tab, then check the result before a long capture</h2>
+      <p>Open the exact Chrome tab that is playing the website audio, confirm both the tab and the web player are audible, then start Dolphin from that tab. Make a 10-second test first, stop, and preview the waveform before recording a full lecture, webinar, podcast, or live stream.</p><p>Dolphin records one active Chrome tab and saves the result as a local MP3. It does not record the screen, microphone, other tabs, or system-wide audio. A direct download from the publisher is still the best option when one is available.</p>
+
+    </div>
+
+
+
+
+
+
+  </section>
+<section class="section" id="how-it-works">
     <div class="section-head">
       <p class="eyebrow">Step-by-step</p>
       <h2>How to record audio from a website</h2>
@@ -152,6 +166,55 @@
       </article><article class="card">
         <h3>QA and documentation</h3>
         <p>Record website audio behavior for bug reports, product review, and reproducible examples.</p>
+      </article></div>
+
+
+
+
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Player behavior</p>
+      <h2>Match the recording workflow to the website player</h2>
+
+
+    </div>
+
+    <div class="card-grid"><article class="card">
+        <h3>Course lessons</h3>
+        <p>Start each test from the lesson tab. If the course advances by reloading or opening a new page, stop and begin a fresh recording from the new source.</p>
+      </article><article class="card">
+        <h3>Live webinars and radio</h3>
+        <p>Join early, dismiss prompts, confirm playback is stable, and record a short sample before the important segment begins.</p>
+      </article><article class="card">
+        <h3>Podcasts and interviews</h3>
+        <p>Use the publisher's download when available. Otherwise, record the permitted segment from the active player tab and trim it afterward.</p>
+      </article><article class="card">
+        <h3>Embedded players</h3>
+        <p>Keep the page containing the audible player open. If a play button launches another tab, start Dolphin from the tab where the sound actually continues.</p>
+      </article></div>
+
+
+
+
+  </section>
+<section class="section" >
+    <div class="section-head">
+      <p class="eyebrow">Long recordings</p>
+      <h2>Prepare the source before recording a long website session</h2>
+      <p>Let the player load, close overlays that may pause playback, connect power for a long session, and keep enough free storage for the finished MP3. Browser memory, device performance, and page behavior can affect very long recordings.</p><p>During capture, avoid refreshing, closing, replacing, or muting the source tab. If the player changes lessons or moves the audio to a new tab, stop and run another short test before continuing.</p>
+      <a class="text-link" data-track="internal_link_click" href="../support/">Troubleshoot silent or interrupted recordings</a>
+    </div>
+
+    <div class="card-grid"><article class="card">
+        <h3>Before</h3>
+        <p>Test 10 seconds, verify the waveform, preview the sound, and choose a clear filename.</p>
+      </article><article class="card">
+        <h3>During</h3>
+        <p>Keep the source tab open, audible, and stable while the website audio plays.</p>
+      </article><article class="card">
+        <h3>After</h3>
+        <p>Preview the result, trim unwanted playback, and confirm the MP3 opens before closing the source.</p>
       </article></div>
 
 
@@ -309,6 +372,12 @@
           </details><details data-track="support_question_click">
             <summary>Can I trim the website audio before downloading it?</summary>
             <p>Yes. After recording, use the waveform editor to adjust the start and end before saving the local MP3.</p>
+          </details><details data-track="support_question_click">
+            <summary>What happens if a website opens the audio in a new tab?</summary>
+            <p>Start a fresh recording from the tab where the sound is actually playing. Dolphin keeps recording the tab selected at the start rather than automatically following a player into another tab.</p>
+          </details><details data-track="support_question_click">
+            <summary>How should I prepare for a long website audio recording?</summary>
+            <p>Let the player load, close prompts, keep the source tab audible and stable, check available storage, and make a 10-second test recording before the full session.</p>
           </details>
     </div>
   </section>

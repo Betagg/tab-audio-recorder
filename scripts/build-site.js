@@ -515,7 +515,7 @@ const pages = [
   {
     path: "record-audio-from-website/index.html",
     url: "/record-audio-from-website/",
-    updatedAt: "2026-07-20",
+    updatedAt: "2026-07-29",
     title: "How to Record Audio From a Website in Chrome as MP3",
     description:
       "Learn how to record audio from a website in Chrome. Capture the active tab, fix silent recordings, trim the useful part, and save a local MP3.",
@@ -532,6 +532,14 @@ const pages = [
       "Exports local MP3",
     ],
     sections: [
+      {
+        label: "Quick answer",
+        title: "Record the website tab, then check the result before a long capture",
+        body: [
+          "Open the exact Chrome tab that is playing the website audio, confirm both the tab and the web player are audible, then start Dolphin from that tab. Make a 10-second test first, stop, and preview the waveform before recording a full lecture, webinar, podcast, or live stream.",
+          "Dolphin records one active Chrome tab and saves the result as a local MP3. It does not record the screen, microphone, other tabs, or system-wide audio. A direct download from the publisher is still the best option when one is available.",
+        ],
+      },
       {
         id: "how-it-works",
         label: "Step-by-step",
@@ -624,6 +632,42 @@ const pages = [
             "Record website audio behavior for bug reports, product review, and reproducible examples.",
           ],
         ],
+      },
+      {
+        label: "Player behavior",
+        title: "Match the recording workflow to the website player",
+        cards: [
+          [
+            "Course lessons",
+            "Start each test from the lesson tab. If the course advances by reloading or opening a new page, stop and begin a fresh recording from the new source.",
+          ],
+          [
+            "Live webinars and radio",
+            "Join early, dismiss prompts, confirm playback is stable, and record a short sample before the important segment begins.",
+          ],
+          [
+            "Podcasts and interviews",
+            "Use the publisher's download when available. Otherwise, record the permitted segment from the active player tab and trim it afterward.",
+          ],
+          [
+            "Embedded players",
+            "Keep the page containing the audible player open. If a play button launches another tab, start Dolphin from the tab where the sound actually continues.",
+          ],
+        ],
+      },
+      {
+        label: "Long recordings",
+        title: "Prepare the source before recording a long website session",
+        body: [
+          "Let the player load, close overlays that may pause playback, connect power for a long session, and keep enough free storage for the finished MP3. Browser memory, device performance, and page behavior can affect very long recordings.",
+          "During capture, avoid refreshing, closing, replacing, or muting the source tab. If the player changes lessons or moves the audio to a new tab, stop and run another short test before continuing.",
+        ],
+        cards: [
+          ["Before", "Test 10 seconds, verify the waveform, preview the sound, and choose a clear filename."],
+          ["During", "Keep the source tab open, audible, and stable while the website audio plays."],
+          ["After", "Preview the result, trim unwanted playback, and confirm the MP3 opens before closing the source."],
+        ],
+        link: ["/support/", "Troubleshoot silent or interrupted recordings"],
       },
       {
         label: "Recording quality",
@@ -730,6 +774,14 @@ const pages = [
       {
         q: "Can I trim the website audio before downloading it?",
         a: "Yes. After recording, use the waveform editor to adjust the start and end before saving the local MP3.",
+      },
+      {
+        q: "What happens if a website opens the audio in a new tab?",
+        a: "Start a fresh recording from the tab where the sound is actually playing. Dolphin keeps recording the tab selected at the start rather than automatically following a player into another tab.",
+      },
+      {
+        q: "How should I prepare for a long website audio recording?",
+        a: "Let the player load, close prompts, keep the source tab audible and stable, check available storage, and make a 10-second test recording before the full session.",
       },
     ],
     schema: ["HowTo", "FAQPage", "BreadcrumbList"],
